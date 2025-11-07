@@ -3541,7 +3541,7 @@ endc
 	learnset 10, CONFUSION
 	learnset 13, NIGHT_SHADE ; Echoed Voice → event move
 	learnset 16, ZEN_HEADBUTT
-	learnset 19, SHADOW_BALL ; Psycho Shift → new move
+	learnset 19, MIRROR_COAT
 	learnset 22, WING_ATTACK ; Extrasensory → egg move
 	learnset 25, TAKE_DOWN
 	learnset 28, REFLECT
@@ -3562,9 +3562,9 @@ endc
 	learnset 10, CONFUSION
 	learnset 13, NIGHT_SHADE ; Echoed Voice → event move
 	learnset 16, ZEN_HEADBUTT
-	learnset 19, SHADOW_BALL ; Psycho Shift → new move
+	learnset 19, MIRROR_COAT ; Psycho Shift → new move
 	learnset 23, WING_ATTACK ; Extrasensory → egg move
-	learnset 27, TAKE_DOWN
+	learnset 27, PSYBEAM
 	learnset 31, REFLECT
 	learnset 35, AIR_SLASH
 	learnset 39, EXTRASENSORY ; Uproar → Extrasensory
