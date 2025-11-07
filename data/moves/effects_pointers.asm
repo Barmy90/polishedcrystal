@@ -116,6 +116,7 @@ MoveEffectsPointers:
 	dw Rollout
 	dw Swagger
 	dw ConditionalBoostHit
+	dw BurnBoostHit
 	dw Attract
 	dw Return
 	dw SacredFire

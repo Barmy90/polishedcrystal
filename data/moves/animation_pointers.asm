@@ -34,7 +34,7 @@ BattleAnimations::
 	fardw BattleAnim_Headbutt
 	fardw BattleAnim_HornAttack
 	fardw BattleAnim_Trick
-	fardw BattleAnim_Hex
+	fardw BattleAnim_InfernalHex
 	fardw BattleAnim_Tackle
 	fardw BattleAnim_BodySlam
 	fardw BattleAnim_Wrap

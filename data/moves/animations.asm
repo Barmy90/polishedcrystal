@@ -3804,7 +3804,7 @@ BattleAnim_Reversal:
 	anim_wait 24
 	anim_ret
 
-BattleAnim_Hex:
+BattleAnim_InfernalHex:
 	anim_2gfx ANIM_GFX_FIRE, ANIM_GFX_SPEED
 	anim_battlergfx_2row
 	anim_bgp $f8

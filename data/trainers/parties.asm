@@ -202,7 +202,7 @@ if DEF(FAITHFUL)
 else
 	tr_mon 24, NOCTOWL, MALE
 		tr_evs 64 HP, 64 Spe
-		tr_moves HYPNOSIS, FORESIGHT, CONFUSION, HEX
+		tr_moves HYPNOSIS, FORESIGHT, CONFUSION, SHADOW_BALL
 endc
 	tr_mon 25, MISDREAVUS, MALE
 		tr_evs 64 SAt, 64 Spe

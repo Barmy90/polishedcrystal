@@ -31,7 +31,7 @@ MoveNames::
 	li "Headbutt"
 	li "Horn Attack"
 	li "Trick"
-	li "Hex"
+	li "Infernal Hex"
 	li "Tackle"
 	li "Body Slam"
 	li "Wrap"

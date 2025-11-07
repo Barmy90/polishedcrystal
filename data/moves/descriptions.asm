@@ -32,7 +32,7 @@ MoveDescriptions::
 	dw HeadbuttDescription
 	dw HornAttackDescription
 	dw TrickDescription
-	dw HexDescription
+	dw InfernalHexDescription
 	dw TackleDescription
 	dw BodySlamDescription
 	dw WrapDescription
@@ -758,9 +758,9 @@ AcrobaticsDescription:
 	next "user has no item."
 	done
 
-HexDescription:
-	text "Damage doubles if"
-	next "foe has status."
+InfernalHexDescription:
+	text "Burns. Add damage"
+	next "if foe has status."
 	done
 
 AvalancheDescription:

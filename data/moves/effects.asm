@@ -1684,6 +1684,30 @@ ConditionalBoostHit:
 	posthiteffects
 	endmove
 
+BurnBoostHit:
+	checkobedience
+	usedmovetext
+	doturn
+	hastarget
+	checkhit
+	checkpriority
+	critical
+	damagestats
+	damagecalc
+	stab
+	conditionalboost
+	damagevariation
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	postfainteffects
+	effectchance
+	burntarget
+	posthiteffects
+	endmove
+
 Attract:
 	checkobedience
 	usedmovetext

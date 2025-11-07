@@ -929,7 +929,7 @@ DunsparceEggSpeciesMoves:
 	db RAGE
 	db ANCIENTPOWER
 	db ROCK_SLIDE
-	db HEX
+	db SHADOW_BALL
 	db $ff
 
 GligarEggSpeciesMoves:

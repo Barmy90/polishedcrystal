@@ -6291,13 +6291,13 @@ CheckUserMove:
 	ret
 
 BoostJumptable:
-	dbw AVALANCHE,  DoAvalanche
-	dbw ACROBATICS, DoAcrobatics
-	dbw FACADE,     DoFacade
-	dbw HEX,        DoHex
-	dbw VENOSHOCK,  DoVenoshock
-	dbw KNOCK_OFF,  DoKnockOff
-	dbw PURSUIT,    DoPursuit
+	dbw AVALANCHE,    DoAvalanche
+	dbw ACROBATICS,   DoAcrobatics
+	dbw FACADE,       DoFacade
+	dbw INFERNAL_HEX, DoHex
+	dbw VENOSHOCK,    DoVenoshock
+	dbw KNOCK_OFF,    DoKnockOff
+	dbw PURSUIT,      DoPursuit
 	dbw -1, -1
 
 BattleCommand_conditionalboost:

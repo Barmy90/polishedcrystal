@@ -714,7 +714,7 @@ endc
 	learnset 18, NIGHT_SHADE ; Payback → new move
 	learnset 20, WILL_O_WISP
 	learnset 23, FEINT_ATTACK
-	learnset 26, HEX
+	learnset 26, SHADOW_BALL
 	learnset 28, PAIN_SPLIT ; Flame Burst → HGSS tutor move
 	learnset 31, EXTRASENSORY
 	learnset 34, SAFEGUARD
@@ -738,7 +738,7 @@ endc
 	learnset 18, NIGHT_SHADE ; Payback → new move
 	learnset 20, HAIL ; Mist → TM move
 	learnset 23, FEINT_ATTACK
-	learnset 26, HEX
+	learnset 26, SHADOW_BALL
 	learnset 28, AURORA_BEAM
 	learnset 31, EXTRASENSORY
 	learnset 34, SAFEGUARD
@@ -1459,7 +1459,7 @@ endc
 	learnset 31, POISON_JAB
 	learnset 34, VENOSHOCK ; Brine → tutor move
 	learnset 37, SCREECH
-	learnset 40, HEX
+	learnset 40, SHADOW_BALL
 	learnset 43, SLUDGE_BOMB ; Sludge Wave → TM move
 	learnset 46, HYDRO_PUMP
 
@@ -1478,7 +1478,7 @@ endc
 	learnset 32, POISON_JAB
 	learnset 36, VENOSHOCK ; Brine → tutor move
 	learnset 40, SCREECH
-	learnset 44, HEX
+	learnset 44, SHADOW_BALL
 	learnset 48, SLUDGE_BOMB ; Sludge Wave → TM move
 	learnset 52, HYDRO_PUMP
 
@@ -2033,7 +2033,7 @@ endc
 	learnset 33, DREAM_EATER
 	learnset 36, DARK_PULSE
 	learnset 40, DESTINY_BOND
-	learnset 43, HEX
+	learnset 43, SHADOW_BALL
 	learnset 47, PERISH_SONG ; Nightmare → new move
 
 	evos_attacks Haunter
@@ -2052,7 +2052,7 @@ endc
 	learnset 39, DREAM_EATER
 	learnset 44, DARK_PULSE
 	learnset 50, DESTINY_BOND
-	learnset 55, HEX
+	learnset 55, SHADOW_BALL
 	learnset 61, PERISH_SONG ; Nightmare → new move
 
 	evos_attacks Gengar
@@ -2070,7 +2070,7 @@ endc
 	learnset 39, DREAM_EATER
 	learnset 44, DARK_PULSE
 	learnset 50, DESTINY_BOND
-	learnset 55, HEX
+	learnset 55, SHADOW_BALL
 	learnset 61, PERISH_SONG ; Nightmare → new move
 
 	evos_attacks Onix
@@ -2333,7 +2333,7 @@ endc
 	learnset 7, ASTONISH ; Bone Club → new move
 	learnset 11, FIRE_SPIN ; Flame Wheel → LGPE move
 	learnset 13, LEER
-	learnset 17, HEX
+	learnset 17, SHADOW_BALL
 	learnset 21, BONEMERANG
 	learnset 23, WILL_O_WISP
 	learnset 27, SHADOW_CLAW ; Shadow Bone → similar move
@@ -3197,7 +3197,7 @@ endc
 	learnset 50, AIR_SLASH
 	learnset 57, NASTY_PLOT ; After You → Nasty Plot
 	learnset 64, DARK_PULSE ; Fiery Wrath → similar move
-	learnset 71, HEX ; Nasty Plot → TR move
+	learnset 71, SHADOW_BALL ; Nasty Plot → TR move
 	learnset 78, BRAVE_BIRD ; Sky Attack → new move
 	learnset 85, PAIN_SPLIT ; Memento → new move
 	learnset 92, HURRICANE
@@ -3427,7 +3427,7 @@ endc
 	learnset 20, DEFENSE_CURL ; Flame Wheel → Defense Curl
 	learnset 24, FLAME_CHARGE ; Defense Curl → Flame Charge
 	learnset 31, SWIFT
-	learnset 35, HEX
+	learnset 35, SHADOW_BALL
 	learnset 43, WILL_O_WISP ; Lava Plume → TM move
 	learnset 48, FLAMETHROWER
 	learnset 56, SHADOW_BALL
@@ -3541,7 +3541,7 @@ endc
 	learnset 10, CONFUSION
 	learnset 13, NIGHT_SHADE ; Echoed Voice → event move
 	learnset 16, ZEN_HEADBUTT
-	learnset 19, HEX ; Psycho Shift → new move
+	learnset 19, SHADOW_BALL ; Psycho Shift → new move
 	learnset 22, WING_ATTACK ; Extrasensory → egg move
 	learnset 25, TAKE_DOWN
 	learnset 28, REFLECT
@@ -3562,7 +3562,7 @@ endc
 	learnset 10, CONFUSION
 	learnset 13, NIGHT_SHADE ; Echoed Voice → event move
 	learnset 16, ZEN_HEADBUTT
-	learnset 19, HEX ; Psycho Shift → new move
+	learnset 19, SHADOW_BALL ; Psycho Shift → new move
 	learnset 23, WING_ATTACK ; Extrasensory → egg move
 	learnset 27, TAKE_DOWN
 	learnset 31, REFLECT
@@ -3791,7 +3791,7 @@ endc
 	learnset 36, ROOST ; Miracle Eye → egg move
 	learnset 39, HAZE ; Psycho Shift → egg move
 	learnset 44, FUTURE_SIGHT
-	learnset 47, HEX ; Power Swap + Guard Swap → new move
+	learnset 47, SHADOW_BALL ; Power Swap + Guard Swap → new move
 	learnset 50, SUCKER_PUNCH ; Me First → HGSS tutor move
 
 	evos_attacks Xatu
@@ -3809,7 +3809,7 @@ endc
 	learnset 39, ROOST ; Miracle Eye → egg move
 	learnset 43, HAZE ; Psycho Shift → egg move
 	learnset 49, FUTURE_SIGHT
-	learnset 53, HEX ; Power Swap + Guard Swap → new move
+	learnset 53, SHADOW_BALL ; Power Swap + Guard Swap → new move
 	learnset 57, SUCKER_PUNCH ; Me First → HGSS tutor move
 
 	evos_attacks Mareep
@@ -4220,7 +4220,7 @@ endc
 	learnset 58, RECOVER ; Heal Pulse → similar move
 
 	evos_attacks SlowkingGalarian
-	learnset 1, HEX ; Eerie Spell → Sw/Sh TR move ; evolution move
+	learnset 1, SHADOW_BALL ; Eerie Spell → Sw/Sh TR move ; evolution move
 	learnset 1, POWER_GEM
 	learnset 1, HIDDEN_POWER
 	learnset 1, CURSE
@@ -4248,7 +4248,7 @@ endc
 	learnset 10, ASTONISH
 	learnset 14, CONFUSE_RAY
 	learnset 19, MEAN_LOOK
-	learnset 23, HEX
+	learnset 23, SHADOW_BALL
 	learnset 28, PSYBEAM
 	learnset 32, PAIN_SPLIT
 	learnset 37, DESTINY_BOND ; Payback → egg move
@@ -4353,7 +4353,7 @@ endc
 	learnset 38, DOUBLE_EDGE
 	learnset 41, EARTHQUAKE ; Endeavor → TM move
 	learnset 43, AIR_SLASH
-	learnset 46, HEX ; Dragon Rush → egg move
+	learnset 46, SHADOW_BALL ; Dragon Rush → egg move
 	learnset 48, ENDURE
 	learnset 51, REVERSAL ; Flail → similar move
 	learnset 53, OUTRAGE ; new move
@@ -4728,7 +4728,7 @@ endc
 	learnset 10, DISABLE
 	learnset 15, HAZE ; Spite → egg move
 	learnset 20, ANCIENTPOWER
-	learnset 25, HEX
+	learnset 25, SHADOW_BALL
 	learnset 30, CURSE
 	learnset 35, GIGA_DRAIN ; Strength Sap → TM move
 	learnset 40, POWER_GEM
@@ -5690,7 +5690,7 @@ endc
 	learnset 1, DISABLE
 	learnset 15, HAZE ; Spite → egg move
 	learnset 20, ANCIENTPOWER
-	learnset 25, HEX
+	learnset 25, SHADOW_BALL
 	learnset 30, CURSE
 	learnset 35, GIGA_DRAIN ; Strength Sap → TM move
 	learnset 40, POWER_GEM
@@ -5892,7 +5892,7 @@ endc
 	learnset 38, DOUBLE_EDGE
 	learnset 41, EARTHQUAKE ; Endeavor → TM move
 	learnset 43, AIR_SLASH
-	learnset 46, HEX ; Dragon Rush → egg move
+	learnset 46, SHADOW_BALL ; Dragon Rush → egg move
 	learnset 48, ENDURE
 	learnset 51, REVERSAL ; Flail → similar move
 	learnset 53, HURRICANE
@@ -5940,4 +5940,3 @@ endc
 	EggEvosAttacks:
 	db -1 ; no more evolutions
 	db -1 ; no more level-up moves
-
