@@ -3417,7 +3417,7 @@ endc
 	learnset 81, FLARE_BLITZ ; Eruption → egg move
 
 	evos_attacks TyphlosionHisuian
-	learnset 1, SHADOW_CLAW ; evolution move
+	learnset 1, INFERNAL_HEX ; evolution move
 	learnset 1, ASTONISH ; new move
 	learnset 1, TACKLE
 	learnset 1, LEER
