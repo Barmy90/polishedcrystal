@@ -2712,7 +2712,7 @@ endc
 	learnset 60, BLIZZARD
 
 	evos_attacks Electabuzz
-	evo_data EVOLVE_HOLDING, ELECTIRIZER, ELECTIVIRE
+	evo_data EVOLVE_HOLDING, ELECTIRIZER, TR_ANYTIME, ELECTIVIRE
 	learnset 1, QUICK_ATTACK
 	learnset 1, LEER
 	learnset 5, THUNDERSHOCK
