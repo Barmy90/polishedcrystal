@@ -141,7 +141,7 @@ AbilityNames:
 	dw ParentalBond
 	dw Berserk
 	dw SlushRush
-	dw Galvanize
+	dw Overload
 	dw Corrosion
 	dw TanglingHair
 	dw ScreenCleaner
@@ -298,7 +298,7 @@ Pixilate:        rawchar "Pixilate@"
 ParentalBond:    rawchar "Parental Bond@"
 Berserk:         rawchar "Berserk@"
 SlushRush:       rawchar "Slush Rush@"
-Galvanize:       rawchar "Galvanize@"
+Overload:        rawchar "Overload@"
 Corrosion:       rawchar "Corrosion@"
 TanglingHair:    rawchar "Tangling Hair@"
 ScreenCleaner:   rawchar "Screen Cleaner@"

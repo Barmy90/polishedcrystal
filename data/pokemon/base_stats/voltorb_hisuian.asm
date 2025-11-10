@@ -1,5 +1,10 @@
+if DEF(FAITHFUL)
 	db  40,  30,  50, 100,  55,  55 ; 330 BST
 	;   hp  atk  def  spe  sat  sdf
+	else
+	db  40, 30,  50, 90,  65,  55 ; 330 BST
+	;   hp  atk  def  spe  sat  sdf
+	endc
 
 	db ELECTRIC, GRASS ; type
 	db 190 ; catch rate
@@ -7,7 +12,7 @@
 	db NO_ITEM, NO_ITEM ; held items
 	dn GENDER_UNKNOWN, HATCH_MEDIUM_FAST ; gender ratio, step cycles to hatch
 
-	abilities_for VOLTORB_HISUIAN, SOUNDPROOF, STATIC, AFTERMATH
+	abilities_for VOLTORB_HISUIAN, GALVANIZE, STATIC, AFTERMATH
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_MINERAL, EGG_MINERAL ; egg groups
 

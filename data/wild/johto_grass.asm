@@ -1689,7 +1689,7 @@
 	wildmon 24, FARFETCH_D
 	wildmon 23, MAREEP
 	wildmon 23, MAREEP
-	wildmon 23, MAREEP
+	wildmon 23, VOLTORB, HISUIAN_FORM
 	; day
 	wildmon 25, PIDGEOTTO
 	wildmon 23, GIRAFARIG
@@ -1697,7 +1697,7 @@
 	wildmon 24, FARFETCH_D
 	wildmon 23, MAREEP
 	wildmon 23, MAREEP
-	wildmon 23, MAREEP
+	wildmon 23, VOLTORB, HISUIAN_FORM
 	; nite
 	wildmon 25, VENONAT
 	wildmon 23, GIRAFARIG
@@ -1705,7 +1705,7 @@
 	wildmon 24, NOCTOWL
 	wildmon 23, VENOMOTH
 	wildmon 23, MAREEP
-	wildmon 23, MAREEP
+	wildmon 23, VOLTORB, HISUIAN_FORM
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_44
