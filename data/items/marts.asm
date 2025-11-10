@@ -121,18 +121,17 @@ Goldenrod2FMart2:
 	db -1
 
 Goldenrod2FMart2Eevee:
-	db 11 ; # items
+	db 10 ; # items
 	db POKE_BALL
 	db GREAT_BALL
 	db LUXURY_BALL
 	db TIMER_BALL
 	db QUICK_BALL
 	db ESCAPE_ROPE
-	db REPEL
 	db POKE_DOLL
-	db BLUESKY_MAIL
-	db MORPH_MAIL
-	db EON_MAIL
+	db LEAF_STONE
+	db WATER_STONE
+	db FIRE_STONE
 	db -1
 
 Goldenrod3FMart:
@@ -172,12 +171,15 @@ Goldenrod5FTMMart:
 	db -1
 
 GoldenrodHarborMart:
-	db 5 ; # items
+	db 8 ; # items
 	db ETHER
 	db ELIXIR
 	db MIRROR_HERB
 	db DESTINY_KNOT
 	db SURF_MAIL
+	db BLUESKY_MAIL
+	db MORPH_MAIL
+	db EON_MAIL
 	db -1
 
 UndergroundMart:
