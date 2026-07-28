@@ -191,6 +191,7 @@ SECTION "Battle Core", ROMX
 
 INCLUDE "engine/battle/core.asm"
 INCLUDE "engine/battle/evolve_battle.asm"
+INCLUDE "engine/battle/mega_evolution.asm"
 
 
 SECTION "Battle Endturn", ROMX

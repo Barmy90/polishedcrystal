@@ -65,7 +65,6 @@ ReadAnyMail:
 	dw LoadMorphMailGFX
 	dw LoadBlueSkyMailGFX
 	dw LoadMusicMailGFX
-	dw LoadMirageMailGFX
 	assert_table_length NUM_MAILS
 
 LoadSurfMailGFX:
@@ -547,66 +546,6 @@ LoadMusicMailGFX:
 	call LovelyEonMail_PlaceIcons
 	pop hl
 	jr MailGFX_PlaceMessage
-
-LoadMirageMailGFX:
-	push bc
-	ld hl, vTiles2 tile $31
-	ld bc, 5 * 8
-	call MailGFX_GenerateMonochromeTilesColor2
-	ld de, BlueSkyMailGrassGFX
-	ld c, 1 * 8
-	call LoadMailGFX_Color2
-	ld de, MailMewGFX
-	ld c, 18 * 8
-	call LoadMailGFX_Color2
-	ld de, LiteBlueMailBorderGFX + 1 * 8
-	ld c, 1 * 8
-	call LoadMailGFX_Color1
-	ld de, LiteBlueMailBorderGFX + 6 * 8
-	ld c, 1 * 8
-	call LoadMailGFX_Color1
-
-	call DrawMailBorder2
-	ld a, $36
-	hlcoord 1, 16
-	call Mail_DrawTopBottomBorder
-	inc a
-	hlcoord 15, 14
-	call Mail_Draw3x2Graphic
-	inc a
-	hlcoord 15, 16
-	ld [hli], a
-	inc a
-	ld [hl], a
-	ld a, $3f
-	hlcoord 1, 1
-	call Mail_Place18TileAlternatingRow
-	ld a, $41
-	hlcoord 0, 2
-	call Mail_Place14TileAlternatingColumn
-	ld a, $43
-	hlcoord 19, 2
-	call Mail_Place14TileAlternatingColumn
-	ld a, $45
-	hlcoord 0, 1
-	ld [hl], a
-	inc a
-	hlcoord 19, 1
-	ld [hl], a
-	inc a
-	hlcoord 0, 16
-	ld [hl], a
-	inc a
-	hlcoord 19, 16
-	ld [hl], a
-	inc a
-	hlcoord 2, 5
-	call Mail_Draw16TileRow
-	inc a
-	hlcoord 2, 11
-	call Mail_Draw16TileRow
-	pop hl
-	; fallthrough
 
 MailGFX_PlaceMessage:
 	ld bc, MAIL_STRUCT_LENGTH

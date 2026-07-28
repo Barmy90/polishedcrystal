@@ -245,6 +245,7 @@ ItemIconPointers:
 	dba HelixFossilIcon
 	dba DomeFossilIcon
 	dba OldAmberIcon
+	dba HardStoneIcon ; MEGA_STONE (reuses Hard Stone icon)
 	dba FlowerMailIcon
 	dba SurfMailIcon
 	dba LiteBlueMailIcon
@@ -254,7 +255,6 @@ ItemIconPointers:
 	dba MorphMailIcon
 	dba BlueSkyMailIcon
 	dba MusicMailIcon
-	dba MirageMailIcon
 	assert_table_length NUM_ITEMS + 1
 
 KeyItemIconPointers:

@@ -244,6 +244,7 @@ ItemDescriptions:
 	dw HelixFossilDesc
 	dw DomeFossilDesc
 	dw OldAmberDesc
+	dw MegaStoneDesc
 	dw FlowerMailDesc
 	dw SurfMailDesc
 	dw LiteBlueMailDesc
@@ -253,7 +254,6 @@ ItemDescriptions:
 	dw MorphMailDesc
 	dw BlueSkyMailDesc
 	dw MusicMailDesc
-	dw MirageMailDesc
 	assert_table_length NUM_ITEMS
 
 KeyItemDescriptions:
@@ -1040,6 +1040,11 @@ ArmorSuitDesc:
 	next "for some #mon."
 	done
 
+MegaStoneDesc:
+	text "A stone that lets"
+	next "#mon Mega Evolve."
+	done
+
 AirBalloonDesc:
 	text "Avoids Ground att-"
 	next "acks until popped."
@@ -1438,11 +1443,6 @@ BlueSkyMailDesc:
 
 MusicMailDesc:
 	text "Natu-print Mail."
-	next "(Hold)"
-	done
-
-MirageMailDesc:
-	text "Mew-print Mail."
 	next "(Hold)"
 	done
 

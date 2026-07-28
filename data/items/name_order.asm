@@ -297,6 +297,8 @@ ItemNameOrder:
 	db NAM_DOME_FOSSIL
 	db NAM_OLD_AMBER
 
+	db NAM_MEGA_STONE
+
 	db NAM_FLOWER_MAIL
 	db NAM_SURF_MAIL
 	db NAM_LITEBLUEMAIL
@@ -306,7 +308,6 @@ ItemNameOrder:
 	db NAM_MORPH_MAIL
 	db NAM_BLUESKY_MAIL
 	db NAM_MUSIC_MAIL
-	db NAM_MIRAGE_MAIL
 	assert_table_length NUM_ITEMS + 1
 	db -1 ; end
 

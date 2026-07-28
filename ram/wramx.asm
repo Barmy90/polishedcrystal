@@ -345,6 +345,15 @@ wSwitchMon::
 wSwitchItem::
 wMoveSwapBuffer:: db
 
+; Whether the player has toggled Mega Evolution on for the move about to be
+; used. Consumed (and cleared) by TryMegaEvolve once the move is confirmed.
+wMegaEvolveToggled:: db
+
+; Scratch space for CalcBattleMonMegaStats. Holds HP/Atk/Def/Spd/SpAtk/SpDef
+; (2 bytes each) so the HP entry can be discarded before copying the rest
+; into wBattleMonStats -- Mega Evolution never changes max HP.
+wMegaStatsBuffer:: ds 12
+
 wMenuScrollPosition:: ds 4
 
 wQueuedScriptBank:: db

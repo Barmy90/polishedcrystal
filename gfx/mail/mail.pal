@@ -44,13 +44,8 @@ if !DEF(MONOCHROME)
 	RGB 30, 26, 00
 	RGB 31, 12, 00
 	RGB 00, 00, 00
-; MIRAGE MAIL
-	RGB 07, 26, 31
-	RGB 31, 31, 00
-	RGB 00, 21, 00
-	RGB 00, 00, 00
 else
-rept 10
+rept 9
 	MONOCHROME_RGB_FOUR
 endr
 endc

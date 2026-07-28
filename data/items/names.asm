@@ -313,6 +313,8 @@ endc
 	li "Dome Fossil"
 	li "Old Amber"
 
+	li "Mega Stone"
+
 	li "Flower Mail"
 	li "Surf Mail"
 	li "LiteBlueMail"
@@ -322,7 +324,6 @@ endc
 	li "Morph Mail"
 	li "BlueSky Mail"
 	li "Music Mail"
-	li "Mirage Mail"
 	assert_list_length NUM_ITEMS + 1
 
 	setcharmap default

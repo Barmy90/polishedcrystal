@@ -246,6 +246,7 @@ ItemEffects:
 	db ITEMEFFECT_NONE           ; HELIX_FOSSIL
 	db ITEMEFFECT_NONE           ; DOME_FOSSIL
 	db ITEMEFFECT_NONE           ; OLD_AMBER
+	db ITEMEFFECT_NONE           ; MEGA_STONE
 	db ITEMEFFECT_NONE           ; FLOWER_MAIL
 	db ITEMEFFECT_NONE           ; SURF_MAIL
 	db ITEMEFFECT_NONE           ; LITEBLUEMAIL
@@ -255,5 +256,4 @@ ItemEffects:
 	db ITEMEFFECT_NONE           ; MORPH_MAIL
 	db ITEMEFFECT_NONE           ; BLUESKY_MAIL
 	db ITEMEFFECT_NONE           ; MUSIC_MAIL
-	db ITEMEFFECT_NONE           ; MIRAGE_MAIL
 	assert_table_length NUM_ITEMS + 1 ; count PARK_BALL

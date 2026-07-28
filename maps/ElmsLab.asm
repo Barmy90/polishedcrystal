@@ -205,8 +205,8 @@ CyndaquilPokeBallScript:
 	iftrue_jumptext ElmPokeBallText
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
-	pokepic CYNDAQUIL
-	cry CYNDAQUIL
+	pokepic PIKACHU
+	cry PIKACHU
 	waitbutton
 	closepokepic
 	opentext
@@ -218,7 +218,7 @@ CyndaquilPokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	givepoke CYNDAQUIL, PLAIN_FORM, 5, ORAN_BERRY
+	givepoke PIKACHU, PLAIN_FORM, 5, ORAN_BERRY
 	writetext LyraChoosesStarterText
 	waitbutton
 	closetext
@@ -283,8 +283,8 @@ ChikoritaPokeBallScript:
 	iftrue_jumptext ElmPokeBallText
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
-	pokepic CHIKORITA
-	cry CHIKORITA
+	pokepic MEWTWO
+	cry MEWTWO
 	waitbutton
 	closepokepic
 	opentext
@@ -296,7 +296,7 @@ ChikoritaPokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	givepoke CHIKORITA, PLAIN_FORM, 5, ORAN_BERRY
+	givepoke MEWTWO, PLAIN_FORM, 5, MEGA_STONE
 	writetext LyraChoosesStarterText
 	waitbutton
 	closetext
@@ -1053,8 +1053,8 @@ LabWhereGoingText:
 
 TakeCyndaquilText:
 	text "Elm: You'll take"
-	line "Cyndaquil, the"
-	cont "fire #mon?"
+	line "Pikachu, the"
+	cont "mouse #mon?"
 	done
 
 TakeTotodileText:
@@ -1065,8 +1065,8 @@ TakeTotodileText:
 
 TakeChikoritaText:
 	text "Elm: So, you like"
-	line "Chikorita, the"
-	cont "grass #mon?"
+	line "Mewtwo, the"
+	cont "genetic #mon?"
 	done
 
 DidntChooseStarterText:

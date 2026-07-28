@@ -310,17 +310,18 @@ DEF NUM_STONES EQU const_value - FIRST_STONE
 	const DOME_FOSSIL  ; f3
 	const OLD_AMBER    ; f4
 
+	const MEGA_STONE   ; f5
+
 DEF FIRST_MAIL EQU const_value
-	const FLOWER_MAIL  ; f5
-	const SURF_MAIL    ; f6
-	const LITEBLUEMAIL ; f7
-	const PORTRAITMAIL ; f8
-	const LOVELY_MAIL  ; f9
-	const EON_MAIL     ; fa
-	const MORPH_MAIL   ; fb
-	const BLUESKY_MAIL ; fc
-	const MUSIC_MAIL   ; fd
-	const MIRAGE_MAIL  ; fe
+	const FLOWER_MAIL  ; f6
+	const SURF_MAIL    ; f7
+	const LITEBLUEMAIL ; f8
+	const PORTRAITMAIL ; f9
+	const LOVELY_MAIL  ; fa
+	const EON_MAIL     ; fb
+	const MORPH_MAIL   ; fc
+	const BLUESKY_MAIL ; fd
+	const MUSIC_MAIL   ; fe
 DEF NUM_MAILS EQU const_value - FIRST_MAIL
 DEF NUM_ITEMS EQU const_value - 1
 
@@ -471,13 +472,13 @@ endc
 	const NAM_MAX_POTION
 	const NAM_MAX_REPEL
 	const NAM_MAX_REVIVE
+	const NAM_MEGA_STONE
 	const NAM_MENTAL_HERB
 	const NAM_METAL_COAT
 	const NAM_METAL_POWDER
 	const NAM_METRONOME_I
 	const NAM_MINT_LEAF
 	const NAM_MIRACLE_SEED
-	const NAM_MIRAGE_MAIL
 	const NAM_MIRROR_HERB
 	const NAM_MOOMOO_MILK
 	const NAM_MOON_BALL
