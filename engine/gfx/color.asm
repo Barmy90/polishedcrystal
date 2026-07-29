@@ -561,6 +561,18 @@ INCLUDE "gfx/pokegear/fly.pal"
 
 GetBattlemonBackpicPalettePointer:
 	push de
+	; Z-Evolution override: while active, always use the fixed red palette instead of
+	; the species' own colors, regardless of what triggered this reload (send-out,
+	; FinishBattleAnim after every move animation, etc). This is checked directly
+	; against wPlayerSubStatus1 rather than through GetBattleVarAddr/hBattleTurn,
+	; since this routine is unconditionally about the player's own sprite.
+	ld a, [wPlayerSubStatus1]
+	bit SUBSTATUS_Z_EVOLVED, a
+	jr z, .not_z_evolved
+	ld hl, ZEvolutionPaletteColors
+	pop de
+	ret
+.not_z_evolved
 	farcall GetPartyMonPersonality
 	ld c, l
 	ld b, h
@@ -568,6 +580,10 @@ GetBattlemonBackpicPalettePointer:
 	call GetPlayerOrMonPalettePointer
 	pop de
 	ret
+
+ZEvolutionPaletteColors:
+	RGB 31, 12, 04
+	RGB 20, 03, 00
 
 GetEnemyFrontpicPalettePointer:
 	push de

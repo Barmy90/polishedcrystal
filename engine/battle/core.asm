@@ -521,7 +521,7 @@ ParsePlayerAction:
 
 .setmovedata
 	call SetPlayerTurn
-	call TryMegaEvolve
+	call TryZEvolve
 	farcall UpdateMoveData
 	xor a
 	ld [wPlayerCharging], a
@@ -5096,7 +5096,17 @@ MoveSelectionScreen:
 	jr z, .interpret_joypad
 
 	call MoveInfoBox
-	call DrawMegaIcon
+
+	ld de, ZOffText
+	call CanZEvolveNow
+	jr nc, .draw_z_label
+	ld a, [wZEvolveToggled]
+	and a
+	jr z, .draw_z_label
+	ld de, ZOnText
+.draw_z_label
+	hlcoord 2, 14
+	rst PlaceString
 
 	ld a, [wMoveSwapBuffer]
 	and a
@@ -5250,11 +5260,11 @@ MoveSelectionScreen:
 	jmp .menu_loop
 
 .pressed_left
-	call CanMegaEvolveNow
+	call CanZEvolveNow
 	jmp nc, .menu_loop
-	ld a, [wMegaEvolveToggled]
+	ld a, [wZEvolveToggled]
 	xor 1
-	ld [wMegaEvolveToggled], a
+	ld [wZEvolveToggled], a
 	jmp .menu_loop
 
 .pressed_select

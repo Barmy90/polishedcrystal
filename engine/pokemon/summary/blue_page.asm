@@ -16,6 +16,14 @@ SummaryScreen_BluePage:
 	rst PlaceString
 	hlbgcoord 0, 2, wSummaryScreenWindowBuffer
 	ld bc, 8
+	; SummaryScreenInit runs the entire interactive summary screen internally
+	; (SummaryScreenLoop blocks until the player presses B), so a one-shot
+	; overlay called after it returns is far too late -- the stats page has
+	; already been drawn and dismissed by then. Applying it here, right before
+	; every draw of the stats page itself (including on scroll-back to this
+	; page), is the only point that's actually visible to the player. farcall
+	; preserves bc, so the spacing parameter for PrintTempMonStats survives.
+	farcall MaybeOverlayZEvolvedStats
 	farcall PrintTempMonStats
 	ld a, [wTextboxFlags]
 	res USE_BG_MAP_WIDTH_F, a

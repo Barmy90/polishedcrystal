@@ -313,7 +313,7 @@ endc
 	li "Dome Fossil"
 	li "Old Amber"
 
-	li "Mega Stone"
+	li "Z Stone"
 
 	li "Flower Mail"
 	li "Surf Mail"

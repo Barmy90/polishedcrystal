@@ -244,7 +244,7 @@ ItemDescriptions:
 	dw HelixFossilDesc
 	dw DomeFossilDesc
 	dw OldAmberDesc
-	dw MegaStoneDesc
+	dw ZStoneDesc
 	dw FlowerMailDesc
 	dw SurfMailDesc
 	dw LiteBlueMailDesc
@@ -1040,9 +1040,9 @@ ArmorSuitDesc:
 	next "for some #mon."
 	done
 
-MegaStoneDesc:
+ZStoneDesc:
 	text "A stone that lets"
-	next "#mon Mega Evolve."
+	next "#mon Z-Evolve."
 	done
 
 AirBalloonDesc:

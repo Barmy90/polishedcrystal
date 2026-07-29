@@ -296,7 +296,7 @@ ChikoritaPokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	givepoke MEWTWO, PLAIN_FORM, 5, MEGA_STONE
+	givepoke MEWTWO, PLAIN_FORM, 5, Z_STONE
 	writetext LyraChoosesStarterText
 	waitbutton
 	closetext

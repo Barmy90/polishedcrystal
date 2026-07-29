@@ -345,14 +345,17 @@ wSwitchMon::
 wSwitchItem::
 wMoveSwapBuffer:: db
 
-; Whether the player has toggled Mega Evolution on for the move about to be
-; used. Consumed (and cleared) by TryMegaEvolve once the move is confirmed.
-wMegaEvolveToggled:: db
+; Whether the player has toggled Z-Evolution on for the move about to be
+; used. Consumed (and cleared) by TryZEvolve once the move is confirmed.
+wZEvolveToggled:: db
 
-; Scratch space for CalcBattleMonMegaStats. Holds HP/Atk/Def/Spd/SpAtk/SpDef
-; (2 bytes each) so the HP entry can be discarded before copying the rest
-; into wBattleMonStats -- Mega Evolution never changes max HP.
-wMegaStatsBuffer:: ds 12
+; Scratch space for CalcBattleMonZStats' HP/Atk/Def/Spd/SpAtk/SpDef (2 bytes each) so
+; the HP entry can be discarded before copying the rest into wBattleMonStats --
+; Z-Evolution never changes max HP. Also reused (via direct "wZStatsBuffer + N"
+; offsets, since WRAMX has no room for a second buffer) as scratch for
+; CalcZStatBonuses' stat-ranking pass, which always runs to completion before
+; CalcBattleMonZStats needs this space for its own purpose.
+wZStatsBuffer:: ds 12
 
 wMenuScrollPosition:: ds 4
 
