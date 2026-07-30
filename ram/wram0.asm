@@ -288,10 +288,22 @@ wEnemyTrainerBaseReward:: db
 ; wEnemyTrainerAIFlags was reserved but never actually populated or read anywhere
 ; (TRNATTR_AI_MOVE_WEIGHTS is instead re-read live from TrainerClassAttributes by
 ; every consumer, keyed on wTrainerClass -- see engine/battle/ai/move.asm). Its
-; first byte is repurposed here as scratch for AIWantsBattleBond's decision facts
-; (engine/battle/battle_bond.asm); the other two bytes remain reserved/unused.
+; three bytes are repurposed here for Battle Bond:
 wBattleBondAIFacts:: db
-	ds 2
+; Whether each side has Battle Bonded at all yet THIS BATTLE. Deliberately NOT the
+; same thing as the SUBSTATUS_BATTLE_BOND bit (wPlayerSubStatus1/wEnemySubStatus1):
+; that bit lives in the per-active-mon volatile status block, which
+; NewBattleMonStatus/NewEnemyMonStatus (engine/battle/core.asm) wipe on every
+; send-in (switch or otherwise) by design, so the stat/palette boost correctly
+; reverts when the Bonded mon leaves the field -- but that also means it can't be
+; used to gate "has this side already used Battle Bond this battle", since it'd
+; forget after any switch and let a new (or the same) mon Bond again. These two
+; bytes sit within wBattle..wBattleEnd instead, so they're only cleared once, by
+; ClearBattleRAM (engine/battle/start_battle.asm) at actual battle start, and stay
+; set across any number of switches. See CanBattleBondNow/CanEnemyBattleBondNow and
+; PlayBattleBondAnim (engine/battle/battle_bond.asm).
+wPlayerBattleBondUsed:: db
+wEnemyBattleBondUsed:: db
 wOTClassName:: ds TRAINER_CLASS_NAME_LENGTH
 
 wCurOTMon:: db
