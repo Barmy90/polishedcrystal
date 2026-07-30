@@ -92,11 +92,13 @@ CanZEvolveNow::
 	ret
 
 TryZEvolve::
-; Called once the player's move is locked in for the turn, before it executes. If the
-; player toggled Z-Evolution on and the active Pokémon is eligible: recompute its
-; Attack/Defense/SpAtk/SpDef/Speed with the tiered bonus and recolor its sprite red.
-; (No animation for now -- deferred until the core mechanic is confirmed working; see
-; Planned Features.md.) Species/form/type/ability/sprite graphic are all left
+; Called once the player's move is locked in for the turn, before it executes (i.e.
+; before the move's own animation runs). If the player toggled Z-Evolution on and the
+; active Pokémon is eligible: recompute its Attack/Defense/SpAtk/SpDef/Speed with the
+; tiered bonus, recolor its sprite red, then play the Focus Energy animation and a
+; "<mon> powered up!" message. The message ends on a prompt, which blocks until the
+; player dismisses it, so the move's own animation can't start until this one has
+; been seen and cleared. Species/form/type/ability/sprite graphic are all left
 ; alone -- only wBattleMon*/wCur* (transient, in-battle state) are touched, so
 ; switching out, fainting, or ending the battle reverts the stats for free. The
 ; palette override reverts for free too: every send-out unconditionally reloads the
@@ -123,11 +125,102 @@ TryZEvolve::
 	call CalcZStatBonuses
 	call CalcBattleMonZStats
 
+	; See PlayZEvolveAnim below for why this doesn't just farcall
+	; PlayBattleAnimDE directly.
+	ld de, FOCUS_ENERGY
+	call PlayZEvolveAnim
+
+	; ZEvolvePoweredUpText is defined in data/text/battle.asm, not here --
+	; StdBattleTextbox's real implementation is hardcoded to run from bank 20
+	; (it farjps there internally regardless of the caller's own bank), so any
+	; text it prints must actually live in bank 20 too, the same as every
+	; other battle message (e.g. GettingPumpedText, right next to it).
+	ld hl, ZEvolvePoweredUpText
+	call StdBattleTextbox
+	ret
+
+PlayZEvolveAnim:
+; Plays the animation in de, mirroring PlayBattleAnimDE + PlayBattleAnim +
+; _PlayBattleAnim (engine/battle/core.asm, engine/battle_anims/anim_commands.asm)
+; line for line -- except the palette flag is set and reloaded (via
+; FinishBattleAnim) in the middle, immediately before the script itself starts
+; running (the farcall BattleAnimRunScript below), rather than before or after
+; the whole animation call.
+;
+; Both of those simpler options were tried first and didn't work: setting the
+; flag/reloading before calling the animation at all left the recolor visible
+; during _PlayBattleAnim's own ~7-frame startup (the DelayFrames(6) and
+; DelayFrame below, which run before the script's visuals start at all) --
+; several visibly red frames before anything masks it. Reloading after
+; PlayBattleAnimDE returned put it after a separate, always-perceptible gap
+; instead (WaitSFX plus BattleAnimRunScript's own internal HUD-restore/
+; palette-revert cleanup). Landing it right here, between the startup and the
+; script itself, means the recolor happens at most one frame before Focus
+; Energy's script starts its own white/yellow charge-up flash (an OBP0 shade
+; remap) -- which is what actually masks it.
+	ld a, e
+	ld [wFXAnimIDLo], a
+	ld a, d
+	ld [wFXAnimIDHi], a
+	call ApplyTilemapInVBlank
+
+	farcall CheckBattleAnimSubstitution
+	ldh a, [rWBK]
+	ld [wMoveSwapBuffer], a ; also kept here for the mid-sequence restore below
+	push af
+	ld a, 5
+	ldh [rWBK], a
+
+	ld c, 6
+	call DelayFrames
+
+	farcall BattleAnimAssignPals
+	farcall BattleAnimRequestPals
+	call DelayFrame
+
+	ld c, 1
+	ldh a, [rSPD]
+	bit 7, a
+	jr nz, .got_speed
+	ld c, 3
+
+.got_speed
+	ld hl, hVBlank
+	ld a, [hl]
+	push af
+	ld [hl], c
+
 	ld a, BATTLE_VARS_SUBSTATUS1
 	call GetBattleVarAddr
 	set SUBSTATUS_Z_EVOLVED, [hl]
 
-	call UpdatePlayerHUD
+	; FinishBattleAnim reloads both the player's AND enemy's palettes together
+	; (_CGB_BattleColors), and does so assuming the normal WRAM bank is active
+	; -- not bank 5, the animation engine's own scratch bank set above. Calling
+	; it while still on bank 5 was cross-contaminating the enemy's palette
+	; with the player's, tinting the enemy sprite red too. Restore the real
+	; bank just for this call, then switch back to 5 for the rest of the
+	; animation.
+	ld a, [wMoveSwapBuffer]
+	ldh [rWBK], a
+	call FinishBattleAnim
+	ld a, 5
+	ldh [rWBK], a
+
+	farcall BattleAnimRunScript
+
+	pop af
+	ldh [hVBlank], a
+
+	ld a, $1
+	ldh [hBGMapMode], a
+
+	ld c, 3
+	call DelayFrames
+	call WaitSFX
+
+	pop af
+	ldh [rWBK], a
 	ret
 
 ; Scratch layout used below, inside wZStatsBuffer (12 bytes, otherwise unused until

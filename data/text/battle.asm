@@ -1089,6 +1089,11 @@ GettingPumpedText:
 	line "getting pumped!"
 	prompt
 
+ZEvolvePoweredUpText::
+	text "<USER>"
+	line "powered up!"
+	prompt
+
 RecoilText:
 	text "<USER> is"
 	line "hit with recoil!"
