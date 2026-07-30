@@ -561,18 +561,18 @@ INCLUDE "gfx/pokegear/fly.pal"
 
 GetBattlemonBackpicPalettePointer:
 	push de
-	; Z-Evolution override: while active, always use the fixed red palette instead of
+	; Battle Bond override: while active, always use the fixed red palette instead of
 	; the species' own colors, regardless of what triggered this reload (send-out,
 	; FinishBattleAnim after every move animation, etc). This is checked directly
 	; against wPlayerSubStatus1 rather than through GetBattleVarAddr/hBattleTurn,
 	; since this routine is unconditionally about the player's own sprite.
 	ld a, [wPlayerSubStatus1]
-	bit SUBSTATUS_Z_EVOLVED, a
-	jr z, .not_z_evolved
-	ld hl, ZEvolutionPaletteColors
+	bit SUBSTATUS_BATTLE_BOND, a
+	jr z, .not_battle_bonded
+	ld hl, BattleBondPaletteColors
 	pop de
 	ret
-.not_z_evolved
+.not_battle_bonded
 	farcall GetPartyMonPersonality
 	ld c, l
 	ld b, h
@@ -581,22 +581,22 @@ GetBattlemonBackpicPalettePointer:
 	pop de
 	ret
 
-ZEvolutionPaletteColors:
+BattleBondPaletteColors:
 	RGB 31, 12, 04
 	RGB 20, 03, 00
 
 GetEnemyFrontpicPalettePointer:
 	push de
-	; Z-Evolution override, mirroring GetBattlemonBackpicPalettePointer above but for
-	; the enemy's own substatus (an enemy Z-Evolving is checked directly against
+	; Battle Bond override, mirroring GetBattlemonBackpicPalettePointer above but for
+	; the enemy's own substatus (an enemy Battle Bonding is checked directly against
 	; wEnemySubStatus1, since this routine is unconditionally about the enemy's sprite).
 	ld a, [wEnemySubStatus1]
-	bit SUBSTATUS_Z_EVOLVED, a
-	jr z, .not_z_evolved
-	ld hl, ZEvolutionPaletteColors
+	bit SUBSTATUS_BATTLE_BOND, a
+	jr z, .not_battle_bonded
+	ld hl, BattleBondPaletteColors
 	pop de
 	ret
-.not_z_evolved
+.not_battle_bonded
 	farcall GetEnemyMonPersonality
 	ld c, l
 	ld b, h

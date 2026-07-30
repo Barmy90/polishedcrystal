@@ -2024,16 +2024,25 @@ SECTION "Lyra1Group", ROMX
 Lyra1Group:
 
 	def_trainer_class LYRA1
+	; Lyra's first battle (Elm's Lab) is the scripted introduction to Battle Bond --
+	; whichever of these three the player's starter choice selects, she force-uses
+	; it via tr_battle_bond ON (bypasses the global unlock flag, since the player
+	; hasn't unlocked it yet at this point in the game -- see LyraBattleScript,
+	; maps/ElmsLab.asm, which sets EVENT_BATTLE_BOND_UNLOCKED regardless of whether
+	; she's beaten or not, since this fight can be lost and never repeats).
 	def_trainer LYRA1_1, "Lyra"
 	tr_mon 5, "Chicory", CHIKORITA
+		tr_battle_bond ON
 	end_trainer
 
 	def_trainer LYRA1_2, "Lyra"
 	tr_mon 5, "Cinder", CYNDAQUIL
+		tr_battle_bond ON
 	end_trainer
 
 	def_trainer LYRA1_3, "Lyra"
 	tr_mon 5, "Toto", TOTODILE
+		tr_battle_bond ON
 	end_trainer
 
 	def_trainer LYRA1_4, "Lyra"

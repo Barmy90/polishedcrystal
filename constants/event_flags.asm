@@ -2447,5 +2447,10 @@
 	const EVENT_MOOMOO_FARM_HIDDEN_MOOMOO_MILK
 	const EVENT_ROUTE_13_HIDDEN_OVAL_STONE
 
+; Battle Bond
+	const EVENT_BATTLE_BOND_UNLOCKED ; set once the player has been introduced to
+	; Battle Bond -- gates whether enemy trainers will ever attempt it themselves.
+	; See TryEnemyBattleBond (engine/battle/battle_bond.asm).
+
 	const_next $8ff
 DEF NUM_EVENTS EQU const_value ; 2303

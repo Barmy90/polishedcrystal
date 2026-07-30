@@ -137,6 +137,7 @@ MACRO tr_mon
 	for i, 1, NUM_MOVES + 1
 		def _tr_pk{d:p}_move{d:i} = NO_MOVE
 	endr
+	def _tr_pk{d:p}_battle_bond = 0
 
 	; Then actually define the data. Level is always required.
 	def _tr_pk{d:p}_level = \1
@@ -267,6 +268,23 @@ MACRO tr_moves
 	endr
 ENDM
 
+MACRO tr_battle_bond
+; Usage: tr_battle_bond ON or tr_battle_bond OFF
+; Deterministically forces this mon to always (ON) or never (OFF) attempt Battle
+; Bond, bypassing the normal AI decision -- and for ON, the global unlock flag too
+; -- see TryEnemyBattleBond (engine/battle/battle_bond.asm). Still requires the mon
+; to actually be eligible (holding the Bond Charm, hasn't already Battle Bonded
+; this battle); this only overrides the AI's own judgment call, not eligibility.
+	def _tr_flags |= TRAINERTYPE_BATTLE_BOND
+	if "\1" === "ON"
+		def _tr_pk{d:p}_battle_bond = BOND_OVERRIDE_ON
+	elif "\1" === "OFF"
+		def _tr_pk{d:p}_battle_bond = BOND_OVERRIDE_OFF
+	else
+		fail "tr_battle_bond expects ON or OFF"
+	endc
+ENDM
+
 MACRO end_trainer
 ; Write out the party data from stored trainer buffer.
 	; First, write the byte length of the party.
@@ -286,6 +304,9 @@ MACRO end_trainer
 	endc
 	if _tr_flags & TRAINERTYPE_MOVES
 		def _tr_size += NUM_MOVES
+	endc
+	if _tr_flags & TRAINERTYPE_BATTLE_BOND
+		def _tr_size += 1
 	endc
 	def _tr_size *= _tr_mons
 
@@ -347,6 +368,10 @@ MACRO end_trainer
 			for i, 1, NUM_MOVES + 1
 				db _tr_pk{d:p}_move{d:i}
 			endr
+		endc
+
+		if _tr_flags & TRAINERTYPE_BATTLE_BOND
+			db _tr_pk{d:p}_battle_bond
 		endc
 	endr
 ENDM

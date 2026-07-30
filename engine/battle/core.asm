@@ -521,7 +521,7 @@ ParsePlayerAction:
 
 .setmovedata
 	call SetPlayerTurn
-	call TryZEvolve
+	call TryBattleBond
 	farcall UpdateMoveData
 	xor a
 	ld [wPlayerCharging], a
@@ -5097,14 +5097,14 @@ MoveSelectionScreen:
 
 	call MoveInfoBox
 
-	ld de, ZOffText
-	call CanZEvolveNow
-	jr nc, .draw_z_label
-	ld a, [wZEvolveToggled]
+	ld de, BattleBondOffText
+	call CanBattleBondNow
+	jr nc, .draw_bond_label
+	ld a, [wBattleBondToggled]
 	and a
-	jr z, .draw_z_label
-	ld de, ZOnText
-.draw_z_label
+	jr z, .draw_bond_label
+	ld de, BattleBondOnText
+.draw_bond_label
 	hlcoord 2, 14
 	rst PlaceString
 
@@ -5260,11 +5260,11 @@ MoveSelectionScreen:
 	jmp .menu_loop
 
 .pressed_left
-	call CanZEvolveNow
+	call CanBattleBondNow
 	jmp nc, .menu_loop
-	ld a, [wZEvolveToggled]
+	ld a, [wBattleBondToggled]
 	xor 1
-	ld [wZEvolveToggled], a
+	ld [wBattleBondToggled], a
 	jmp .menu_loop
 
 .pressed_select
@@ -5866,11 +5866,11 @@ ParseEnemyAction:
 	jr nz, ResetVarsForSubstatusRage
 
 	; Simple AI hook: only reached when the enemy has just freshly chosen a move
-	; (not a continuing locked-in one, same restriction TryZEvolve's player-side
+	; (not a continuing locked-in one, same restriction TryBattleBond's player-side
 	; call site gets for free by living at .setmovedata) -- mirrors that placement,
 	; right before the move actually executes.
 	call SetEnemyTurn
-	call TryEnemyZEvolve
+	call TryEnemyBattleBond
 
 .skip_load
 	call SetEnemyTurn

@@ -14,6 +14,13 @@ ReadTrainerParty:
 	ld bc, PARTYMON_STRUCT_LENGTH * PARTY_LENGTH
 	rst ByteFill
 
+	; Clear any Battle Bond override left over from a previous trainer -- most
+	; trainers don't use tr_battle_bond at all, so this must not carry over.
+	ld hl, wEnemyBattleBondOverrides
+	ld bc, PARTY_LENGTH
+	xor a
+	rst ByteFill
+
 	call FindTrainerData
 	ld a, b
 	add l
@@ -254,6 +261,25 @@ ReadTrainerParty:
 	pop hl
 
 .not_moves
+; Battle Bond override?
+	ld a, [wOtherTrainerType]
+	bit TRNTYPE_BATTLE_BOND, a
+	jr z, .not_battle_bond
+
+	call GetNextTrainerDataByte
+	ld c, a ; 0 = no override, or BOND_OVERRIDE_ON/OFF (tr_battle_bond)
+
+	push hl
+	ld a, [wOTPartyCount]
+	dec a
+	ld e, a
+	ld d, 0
+	ld hl, wEnemyBattleBondOverrides
+	add hl, de
+	ld [hl], c
+	pop hl
+
+.not_battle_bond
 	; custom DVs or nature may alter stats
 	ld a, [wOtherTrainerType]
 	and TRAINERTYPE_EVS | TRAINERTYPE_DVS | TRAINERTYPE_PERSONALITY

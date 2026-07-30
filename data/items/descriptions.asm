@@ -244,7 +244,7 @@ ItemDescriptions:
 	dw HelixFossilDesc
 	dw DomeFossilDesc
 	dw OldAmberDesc
-	dw ZStoneDesc
+	dw BondCharmDesc
 	dw FlowerMailDesc
 	dw SurfMailDesc
 	dw LiteBlueMailDesc
@@ -1040,9 +1040,9 @@ ArmorSuitDesc:
 	next "for some #mon."
 	done
 
-ZStoneDesc:
-	text "A stone that lets"
-	next "#mon Z-Evolve."
+BondCharmDesc:
+	text "A charm that lets"
+	next "#mon Battle Bond."
 	done
 
 AirBalloonDesc:

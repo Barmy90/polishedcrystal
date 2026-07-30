@@ -310,7 +310,7 @@ DEF NUM_STONES EQU const_value - FIRST_STONE
 	const DOME_FOSSIL  ; f3
 	const OLD_AMBER    ; f4
 
-	const Z_STONE      ; f5
+	const BOND_CHARM   ; f5
 
 DEF FIRST_MAIL EQU const_value
 	const FLOWER_MAIL  ; f6
@@ -472,7 +472,7 @@ endc
 	const NAM_MAX_POTION
 	const NAM_MAX_REPEL
 	const NAM_MAX_REVIVE
-	const NAM_Z_STONE
+	const NAM_BOND_CHARM
 	const NAM_MENTAL_HERB
 	const NAM_METAL_COAT
 	const NAM_METAL_POWDER

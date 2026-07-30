@@ -47,6 +47,7 @@ DEF SWITCH_OFTEN       EQU 1 << SWITCH_OFTEN_F
 	const TRNTYPE_PERSONALITY
 	const TRNTYPE_NICKNAME
 	const TRNTYPE_MOVES
+	const TRNTYPE_BATTLE_BOND
 
 ; see data/trainers/parties.asm
 DEF TRAINERTYPE_ITEM        EQU 1 << TRNTYPE_ITEM
@@ -55,6 +56,13 @@ DEF TRAINERTYPE_DVS         EQU 1 << TRNTYPE_DVS
 DEF TRAINERTYPE_PERSONALITY EQU 1 << TRNTYPE_PERSONALITY
 DEF TRAINERTYPE_NICKNAME    EQU 1 << TRNTYPE_NICKNAME
 DEF TRAINERTYPE_MOVES       EQU 1 << TRNTYPE_MOVES
+DEF TRAINERTYPE_BATTLE_BOND EQU 1 << TRNTYPE_BATTLE_BOND
+
+; Per-mon Battle Bond override byte (see tr_battle_bond, data/trainers/macros.asm,
+; and TryEnemyBattleBond, engine/battle/battle_bond.asm). 0 (unwritten) means no
+; override -- normal AI/eligibility rules apply.
+DEF BOND_OVERRIDE_ON  EQU 1
+DEF BOND_OVERRIDE_OFF EQU 2
 
 ; PsychicInverMons size (see data/trainers/psychic_inver.asm)
 DEF NUM_INVER_MONS EQU 7

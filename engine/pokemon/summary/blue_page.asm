@@ -23,7 +23,7 @@ SummaryScreen_BluePage:
 	; every draw of the stats page itself (including on scroll-back to this
 	; page), is the only point that's actually visible to the player. farcall
 	; preserves bc, so the spacing parameter for PrintTempMonStats survives.
-	farcall MaybeOverlayZEvolvedStats
+	farcall MaybeOverlayBattleBondStats
 	farcall PrintTempMonStats
 	ld a, [wTextboxFlags]
 	res USE_BG_MAP_WIDTH_F, a

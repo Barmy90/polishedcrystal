@@ -285,7 +285,13 @@ wBadgeBaseLevel:: db
 wEnemyTrainerItem1:: db
 wEnemyTrainerItem2:: db
 wEnemyTrainerBaseReward:: db
-wEnemyTrainerAIFlags:: ds 3
+; wEnemyTrainerAIFlags was reserved but never actually populated or read anywhere
+; (TRNATTR_AI_MOVE_WEIGHTS is instead re-read live from TrainerClassAttributes by
+; every consumer, keyed on wTrainerClass -- see engine/battle/ai/move.asm). Its
+; first byte is repurposed here as scratch for AIWantsBattleBond's decision facts
+; (engine/battle/battle_bond.asm); the other two bytes remain reserved/unused.
+wBattleBondAIFacts:: db
+	ds 2
 wOTClassName:: ds TRAINER_CLASS_NAME_LENGTH
 
 wCurOTMon:: db
@@ -1417,7 +1423,14 @@ wColoredMaleFemaleShinyTiles:: ds 3 tiles
 
 SECTION "Unused", WRAM0
 
-	ds 318 ; it's free real estate
+; Per-mon Battle Bond override, one byte per party slot (0-based, same indexing as
+; wCurOTMon), populated by ReadTrainerParty from each mon's optional
+; tr_battle_bond field (data/trainers/macros.asm) if the current trainer has one.
+; 0 = no override, otherwise BOND_OVERRIDE_ON/OFF (constants/trainer_data_constants.asm).
+; Consulted by TryEnemyBattleBond (engine/battle/battle_bond.asm).
+wEnemyBattleBondOverrides:: ds PARTY_LENGTH
+
+	ds 318 - PARTY_LENGTH ; it's free real estate
 
 
 SECTION "Options", WRAM0

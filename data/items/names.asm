@@ -313,7 +313,7 @@ endc
 	li "Dome Fossil"
 	li "Old Amber"
 
-	li "Z Stone"
+	li "Bond Charm"
 
 	li "Flower Mail"
 	li "Surf Mail"

@@ -296,7 +296,7 @@ ChikoritaPokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	givepoke MEWTWO, PLAIN_FORM, 5, Z_STONE
+	givepoke MEWTWO, PLAIN_FORM, 5, BOND_CHARM
 	writetext LyraChoosesStarterText
 	waitbutton
 	closetext
@@ -637,6 +637,12 @@ LyraBattleScript:
 .AfterYourDefeat:
 	showtext ElmsLabLyraText_YouLost
 .FinishLyra:
+	; Lyra force-Battle-Bonds in this fight regardless (tr_battle_bond ON, see her
+	; LYRA1_1/2/3 trainer data) -- this fight is what introduces the player to the
+	; mechanic, so it unlocks Battle Bond for every other enemy trainer from here on,
+	; win or lose (BATTLETYPE_CANLOSE -- this battle only ever happens once either
+	; way, so there's no later rematch that could set the flag instead).
+	setevent EVENT_BATTLE_BOND_UNLOCKED
 	turnobject ELMSLAB_LYRA, UP
 	opentext
 	writetext ElmsLabLyraThankYouText

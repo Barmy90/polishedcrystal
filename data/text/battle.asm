@@ -1089,7 +1089,7 @@ GettingPumpedText:
 	line "getting pumped!"
 	prompt
 
-ZEvolvePoweredUpText::
+BattleBondPoweredUpText::
 	text "<USER>"
 	line "powered up!"
 	prompt
