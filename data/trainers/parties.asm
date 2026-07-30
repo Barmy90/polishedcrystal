@@ -2033,10 +2033,7 @@ Lyra1Group:
 	end_trainer
 
 	def_trainer LYRA1_3, "Lyra"
-	; Temporarily swapped to a fully-evolved Feraligatr (holding the Z Stone) to test
-	; the enemy AI's Z-Evolution trigger -- Totodile itself can't Z-Evolve, since it
-	; isn't fully evolved. Revert to "tr_mon 5, "Toto", TOTODILE" once done testing.
-	tr_mon 5, "Toto", FERALIGATR @ Z_STONE
+	tr_mon 5, "Toto", TOTODILE
 	end_trainer
 
 	def_trainer LYRA1_4, "Lyra"
