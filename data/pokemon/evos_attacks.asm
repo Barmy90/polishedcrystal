@@ -3385,14 +3385,14 @@ endc
 	learnset 6, SMOKESCREEN
 	learnset 10, EMBER
 	learnset 13, QUICK_ATTACK
+	learnset 18, DIG
 	learnset 20, DEFENSE_CURL ; Flame Wheel → Defense Curl
 	learnset 24, FLAME_CHARGE ; Defense Curl → Flame Charge
-	learnset 31, SWIFT
-	learnset 35, DIG ; Flame Charge → TM move
+	learnset 30, SWIFT
+	learnset 34, ROLLOUT
 	learnset 42, REVERSAL ; Lava Plume → egg move
 	learnset 46, FLAMETHROWER
 	learnset 53, EARTH_POWER ; Inferno → new move
-	learnset 57, ROLLOUT
 	learnset 64, DOUBLE_EDGE
 	learnset 68, EARTHQUAKE ; Burn Up → TM move
 	learnset 75, FLARE_BLITZ ; Eruption → egg move
@@ -3404,17 +3404,17 @@ endc
 	learnset 6, SMOKESCREEN
 	learnset 10, EMBER
 	learnset 13, QUICK_ATTACK
+	learnset 18, DIG
 	learnset 20, DEFENSE_CURL ; Flame Wheel → Defense Curl
 	learnset 24, FLAME_CHARGE ; Defense Curl → Flame Charge
 	learnset 31, SWIFT
-	learnset 35, DIG ; Flame Charge → TM move
+	learnset 35, ROLLOUT
+	learnset 40, EARTHQUAKE
 	learnset 43, REVERSAL ; Lava Plume → egg move
-	learnset 48, FLAMETHROWER
+	learnset 48, FLARE_BLITZ
 	learnset 56, EARTH_POWER ; Inferno → new move
-	learnset 61, ROLLOUT
 	learnset 69, DOUBLE_EDGE
-	learnset 74, EARTHQUAKE ; Burn Up → TM move
-	learnset 81, FLARE_BLITZ ; Eruption → egg move
+	learnset 81, FIRE_BLAST
 
 	evos_attacks TyphlosionHisuian
 	learnset 1, SHADOW_CLAW ; evolution move
