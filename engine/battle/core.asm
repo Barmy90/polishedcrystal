@@ -5865,6 +5865,13 @@ ParseEnemyAction:
 	call CheckLockedIn
 	jr nz, ResetVarsForSubstatusRage
 
+	; Simple AI hook: only reached when the enemy has just freshly chosen a move
+	; (not a continuing locked-in one, same restriction TryZEvolve's player-side
+	; call site gets for free by living at .setmovedata) -- mirrors that placement,
+	; right before the move actually executes.
+	call SetEnemyTurn
+	call TryEnemyZEvolve
+
 .skip_load
 	call SetEnemyTurn
 	farcall UpdateMoveData

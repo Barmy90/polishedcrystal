@@ -587,6 +587,16 @@ ZEvolutionPaletteColors:
 
 GetEnemyFrontpicPalettePointer:
 	push de
+	; Z-Evolution override, mirroring GetBattlemonBackpicPalettePointer above but for
+	; the enemy's own substatus (an enemy Z-Evolving is checked directly against
+	; wEnemySubStatus1, since this routine is unconditionally about the enemy's sprite).
+	ld a, [wEnemySubStatus1]
+	bit SUBSTATUS_Z_EVOLVED, a
+	jr z, .not_z_evolved
+	ld hl, ZEvolutionPaletteColors
+	pop de
+	ret
+.not_z_evolved
 	farcall GetEnemyMonPersonality
 	ld c, l
 	ld b, h

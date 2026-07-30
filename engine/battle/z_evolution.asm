@@ -91,6 +91,73 @@ CanZEvolveNow::
 	and a
 	ret
 
+IsEnemyFullyEvolved:
+; Same as IsFullyEvolved, but for the enemy's active Pokémon.
+	ld a, [wEnemyMonSpecies]
+	ld c, a
+	ld a, [wEnemyMonForm]
+	and SPECIESFORM_MASK
+	ld b, a
+	farcall GetEvosAttacksPointer
+	ld a, BANK(EvosAttacks)
+	call GetFarByte
+	inc a
+	jr nz, .not_fully_evolved
+	scf
+	ret
+.not_fully_evolved
+	and a
+	ret
+
+CanEnemyZEvolveNow::
+; Same as CanZEvolveNow, but for the enemy's active Pokémon. Must be called during
+; SetEnemyTurn context (hBattleTurn nonzero) so BATTLE_VARS_SUBSTATUS1 resolves to
+; wEnemySubStatus1 below.
+	ld a, BATTLE_VARS_SUBSTATUS1
+	call GetBattleVarAddr
+	bit SUBSTATUS_Z_EVOLVED, [hl]
+	jr nz, .no
+
+	ld a, [wEnemyMonItem]
+	cp Z_STONE
+	jr nz, .no
+
+	call IsEnemyFullyEvolved
+	jr nc, .no
+
+	scf
+	ret
+
+.no
+	and a
+	ret
+
+TryEnemyZEvolve::
+; Called once the enemy's move is chosen for the turn (freshly selected, not a
+; continuing locked-in move), before it executes. Simple AI hook -- unlike the
+; player's TryZEvolve, there's no toggle/menu step: if the enemy's active Pokémon is
+; eligible (holding the Z Stone, fully evolved, hasn't already Z-Evolved this battle),
+; it always Z-Evolves. Otherwise identical to TryZEvolve -- see its comments above for
+; why each piece is here.
+	call CanEnemyZEvolveNow
+	ret nc
+
+	ld a, [wEnemyMonSpecies]
+	ld [wCurSpecies], a
+	ld a, [wEnemyMonForm]
+	ld [wCurForm], a
+	call GetBaseData
+
+	call CalcZStatBonuses
+	call CalcEnemyMonZStats
+
+	ld de, FOCUS_ENERGY
+	call PlayZEvolveAnim
+
+	ld hl, ZEvolvePoweredUpText
+	call StdBattleTextbox
+	ret
+
 TryZEvolve::
 ; Called once the player's move is locked in for the turn, before it executes (i.e.
 ; before the move's own animation runs). If the player toggled Z-Evolution on and the
@@ -420,6 +487,31 @@ CalcBattleMonZStats:
 
 	ld hl, wZStatsBuffer + 2 ; skip the HP entry
 	ld de, wBattleMonStats
+	ld bc, 10
+	rst CopyBytes
+	ret
+
+CalcEnemyMonZStats:
+; Same as CalcBattleMonZStats, but for the enemy's active battler -- reads its
+; level/EVs from wOTPartyMons (via OTPartyAttr, home/battle.asm) instead of
+; wPartyMons, and writes the result into wEnemyMonStats instead of wBattleMonStats.
+; Trainer-owned Pokémon are never Hyper Trained in this game's trainer data (see
+; read_trainer_party.asm's own "ld b, TRUE" before its CalcPkmnStats call), so this
+; skips the GetHyperTraining lookup the player-side version needs and just always
+; applies EVs.
+	ld a, MON_LEVEL
+	call OTPartyAttr
+	ld [wCurPartyLevel], a
+
+	ld a, MON_EVS - 1
+	call OTPartyAttr ; hl = EVs - 1
+
+	ld de, wZStatsBuffer
+	ld b, TRUE
+	farcall CalcPkmnStats
+
+	ld hl, wZStatsBuffer + 2 ; skip the HP entry
+	ld de, wEnemyMonStats
 	ld bc, 10
 	rst CopyBytes
 	ret
