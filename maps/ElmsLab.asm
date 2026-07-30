@@ -205,8 +205,8 @@ CyndaquilPokeBallScript:
 	iftrue_jumptext ElmPokeBallText
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
-	pokepic PIKACHU
-	cry PIKACHU
+	pokepic CYNDAQUIL
+	cry CYNDAQUIL
 	waitbutton
 	closepokepic
 	opentext
@@ -218,7 +218,7 @@ CyndaquilPokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	givepoke PIKACHU, PLAIN_FORM, 5, ORAN_BERRY
+	givepoke CYNDAQUIL, PLAIN_FORM, 5, BOND_CHARM
 	writetext LyraChoosesStarterText
 	waitbutton
 	closetext
@@ -258,7 +258,7 @@ TotodilePokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	givepoke TOTODILE, PLAIN_FORM, 5, ORAN_BERRY
+	givepoke TOTODILE, PLAIN_FORM, 5, BOND_CHARM
 	writetext LyraChoosesStarterText
 	waitbutton
 	closetext
@@ -283,8 +283,8 @@ ChikoritaPokeBallScript:
 	iftrue_jumptext ElmPokeBallText
 	turnobject ELMSLAB_ELM, DOWN
 	reanchormap
-	pokepic MEWTWO
-	cry MEWTWO
+	pokepic CHIKORITA
+	cry CHIKORITA
 	waitbutton
 	closepokepic
 	opentext
@@ -296,7 +296,7 @@ ChikoritaPokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	givepoke MEWTWO, PLAIN_FORM, 5, BOND_CHARM
+	givepoke CHIKORITA, PLAIN_FORM, 5, BOND_CHARM
 	writetext LyraChoosesStarterText
 	waitbutton
 	closetext

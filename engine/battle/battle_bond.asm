@@ -69,15 +69,17 @@ MaybeOverlayBattleBondStats::
 	ret
 
 CanBattleBondNow::
-; Returns carry set if the player's active Pokémon is currently eligible to Battle
-; Bond: it hasn't already Battle Bonded this battle, and either its friendship is at
-; least BOND_FRIENDSHIP_THRESHOLD or it's holding the Bond Charm (the charm is a
-; deterministic alternative to raising friendship, not an additional requirement on
-; top of it). Any species/evolution stage is eligible -- unlike the old Z-Evolution
-; prototype this replaced, there's no "must be fully evolved" restriction anymore.
-	ld a, BATTLE_VARS_SUBSTATUS1
-	call GetBattleVarAddr
-	bit SUBSTATUS_BATTLE_BOND, [hl]
+; Returns carry set if the player's side is currently eligible to Battle Bond: this
+; side hasn't already Battle Bonded THIS BATTLE (wPlayerBattleBondUsed, ram/wram0.asm
+; -- deliberately not the SUBSTATUS_BATTLE_BOND bit, which resets on every switch and
+; so can't be used to enforce a once-per-battle limit; see that byte's own comment),
+; and either the active mon's friendship is at least BOND_FRIENDSHIP_THRESHOLD or
+; it's holding the Bond Charm (the charm is a deterministic alternative to raising
+; friendship, not an additional requirement on top of it). Any species/evolution
+; stage is eligible -- unlike the old Z-Evolution prototype this replaced, there's
+; no "must be fully evolved" restriction anymore.
+	ld a, [wPlayerBattleBondUsed]
+	and a
 	jr nz, .no
 
 	; TrueUserPartyAttr (home/battle.asm) reads whichever side is actually active,
@@ -103,26 +105,25 @@ CanBattleBondNow::
 	ret
 
 CanEnemyBattleBondNow::
-; Same as CanBattleBondNow, but for the enemy's active Pokémon -- no item or
-; friendship requirement at all (enemy trainer Pokémon have no meaningful friendship
-; value by default, and the Bond Charm was only ever a stand-in eligibility gate
-; used before the real global unlock flag + AI decision existed; it was never meant
-; to stick around once those landed). Any TRAINER-owned enemy Pokémon that hasn't
-; already Battle Bonded this battle is a candidate -- TryEnemyBattleBond's own
-; unlock-flag check and AIWantsBattleBond's decision (or a tr_battle_bond override)
-; are what actually gate whether/when it happens. Wild Pokémon are never eligible,
-; full stop -- Battle Bond is framed as something a Trainer and their Pokémon build
-; together, not something a wild mon has access to; wOtherTrainerClass is 0 in wild
-; battles, nonzero in trainer battles (same check start_battle.asm's own trainer-vs-
-; wild music selection already uses). Must be called during SetEnemyTurn context
-; (hBattleTurn nonzero) so BATTLE_VARS_SUBSTATUS1 resolves to wEnemySubStatus1 below.
+; Same as CanBattleBondNow, but for the enemy's side -- no item or friendship
+; requirement at all (enemy trainer Pokémon have no meaningful friendship value by
+; default, and the Bond Charm was only ever a stand-in eligibility gate used before
+; the real global unlock flag + AI decision existed; it was never meant to stick
+; around once those landed). Any TRAINER-owned enemy Pokémon is a candidate as long
+; as this side hasn't already Battle Bonded THIS BATTLE (wEnemyBattleBondUsed --
+; same once-per-battle-not-once-per-switch reasoning as CanBattleBondNow above) --
+; TryEnemyBattleBond's own unlock-flag check and AIWantsBattleBond's decision (or a
+; tr_battle_bond override) are what actually gate whether/when it happens. Wild
+; Pokémon are never eligible, full stop -- Battle Bond is framed as something a
+; Trainer and their Pokémon build together, not something a wild mon has access to;
+; wOtherTrainerClass is 0 in wild battles, nonzero in trainer battles (same check
+; start_battle.asm's own trainer-vs-wild music selection already uses).
 	ld a, [wOtherTrainerClass]
 	and a
 	jr z, .no
 
-	ld a, BATTLE_VARS_SUBSTATUS1
-	call GetBattleVarAddr
-	bit SUBSTATUS_BATTLE_BOND, [hl]
+	ld a, [wEnemyBattleBondUsed]
+	and a
 	jr nz, .no
 
 	scf
@@ -535,6 +536,19 @@ PlayBattleBondAnim:
 	ld a, BATTLE_VARS_SUBSTATUS1
 	call GetBattleVarAddr
 	set SUBSTATUS_BATTLE_BOND, [hl]
+
+	; Also latch the once-per-battle "used" flag (wPlayerBattleBondUsed/
+	; wEnemyBattleBondUsed, ram/wram0.asm) -- unlike the substatus bit above, this
+	; one is never cleared by a switch, only by ClearBattleRAM at actual battle
+	; start, so Battle Bond genuinely can't be reused later this battle just by
+	; switching Pokémon (in or out, same one or a different one).
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wPlayerBattleBondUsed
+	jr z, .got_used_flag
+	ld hl, wEnemyBattleBondUsed
+.got_used_flag
+	ld [hl], 1
 
 	; FinishBattleAnim reloads both the player's AND enemy's palettes together
 	; (_CGB_BattleColors), and does so assuming the normal WRAM bank is active
