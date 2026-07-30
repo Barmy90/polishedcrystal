@@ -121,7 +121,7 @@ Goldenrod2FMart2:
 	db -1
 
 Goldenrod2FMart2Eevee:
-	db 11 ; # items
+	db 20 ; # items
 	db POKE_BALL
 	db GREAT_BALL
 	db LUXURY_BALL
@@ -133,6 +133,20 @@ Goldenrod2FMart2Eevee:
 	db BLUESKY_MAIL
 	db MORPH_MAIL
 	db EON_MAIL
+	; Every stone that evolves the Eevee this same event gives you (see
+	; evos_attacks Eevee, data/pokemon/evos_attacks.asm): Thunderstone/Water
+	; Stone/Fire Stone/Shiny Stone for Jolteon/Vaporeon/Flareon/Sylveon (each
+	; has no alternate method -- the stone is the only way), plus Sun/Moon/
+	; Leaf/Ice Stone for Espeon/Umbreon/Leafeon/Glaceon (each of which also has
+	; a non-item alternate: friendship, or leveling up at a specific location).
+	db FIRE_STONE
+	db WATER_STONE
+	db THUNDERSTONE
+	db LEAF_STONE
+	db SUN_STONE
+	db MOON_STONE
+	db ICE_STONE
+	db SHINY_STONE
 	db -1
 
 Goldenrod3FMart:
