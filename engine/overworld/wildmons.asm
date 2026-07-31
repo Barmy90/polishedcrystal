@@ -10,12 +10,16 @@ LoadWildMonData:
 	jr .done_copy
 
 .copy
+	; Maps only store a single grass encounter rate byte now (one rate
+	; regardless of time of day), right after the 2-byte map id -- so use
+	; that same byte for all four time-of-day slots.
 	inc hl
 	inc hl
-	ld de, wMornEncounterRate
-	ld bc, 3
-	rst CopyBytes
-	ld [de], a ; eve rate = nite rate
+	ld a, [hl]
+	ld [wMornEncounterRate], a
+	ld [wDayEncounterRate], a
+	ld [wNiteEncounterRate], a
+	ld [wEveEncounterRate], a
 .done_copy
 	call _WaterWildmonLookup
 	ld a, 0 ; no-optimize a = 0
