@@ -218,9 +218,9 @@ IsEnemyLastMonStanding:
 	dec b
 	jr nz, .loop
 
+	ld a, c
 	pop bc
 	pop hl
-	ld a, c
 	cp 1
 	jr nz, .not_last
 	scf
