@@ -1773,7 +1773,7 @@
 	wildmon 2, PHANPY
 	wildmon 2, RATTATA
 	wildmon 3, RATTATA
-	wildmon 3, RATTATA
+	wildmon 3, MANKEY
 	; day
 	wildmon 2, GEODUDE
 	wildmon 2, SPEAROW
@@ -1781,7 +1781,7 @@
 	wildmon 2, JIGGLYPUFF
 	wildmon 2, RATTATA
 	wildmon 3, RATTATA
-	wildmon 3, RATTATA
+	wildmon 3, MANKEY
 	; nite
 	wildmon 2, GEODUDE
 	wildmon 2, RATTATA
@@ -1789,7 +1789,7 @@
 	wildmon 2, RATTATA
 	wildmon 2, RATTATA
 	wildmon 3, RATTATA
-	wildmon 3, RATTATA
+	wildmon 3, MANKEY
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_47
