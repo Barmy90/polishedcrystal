@@ -2,6 +2,48 @@
 
 Design/feasibility notes for features under consideration, kept here so implementation can be picked up later without re-deriving the research. Nothing in this file has been implemented yet.
 
+## Custom Signature Abilities
+
+### Context
+
+Goal: give every unique evolutionary line its own distinctive ability, instead of many unrelated lines sharing the same generic pick. The existing roster is large — 166 abilities already implemented in `constants/ability_constants.asm`, essentially the full real Pokémon ability list through Gen 9 — so most of the work is curating what's already there (a deliberately-shared "generic" pool vs. a cull list of weak/narrow filler) before deciding how many genuinely new, invented abilities are worth building on top.
+
+ROM space is the real constraint, not ability-ID space (ability slots are single bytes, room for ~90 more IDs before the byte ceiling). This build targets a fixed 128×16KB = 2MB ROM (MBC3); recent builds report only ~26-28KB free, concentrated almost entirely in the last one-and-a-half of 128 banks (bank $7F entirely empty, $7E ~10KB free) — every other bank is full. That pool is shared with whatever else gets built later (Mega Evolution, held items, etc.), not a dedicated abilities budget.
+
+Sampling real per-ability code sizes in `engine/battle/abilities.asm` (`TraceAbility`/`AnticipationAbility` ~70 lines each, `IntimidateAbility`/`DownloadAbility` ~37-38 lines each, simple status-immunity abilities as little as 4 bytes via a shared handler) gives a working estimate of ~100-250 bytes per new, non-trivial custom ability (handler + jump-table row + name/description text), assuming it reuses an existing trigger hook (on-switch-in, on-contact, on-status, on-weather, stat-mod) rather than needing a brand-new hook mechanism. Culling the weak/filler abilities below frees relatively little on its own (~2KB) since most of them are already cheap thunks into shared handlers, not big dedicated routines.
+
+**Feasibility verdict: roughly 60-100 new custom abilities are realistically buildable** within the ~28-30KB combined budget (baseline free space + culling gains), enough to cover every one of the ~120-150 distinct evolutionary lines currently in the dex, provided most lean on existing trigger patterns and this doesn't have to compete hard with several other big features landing at the same time.
+
+### Generic pool (keep, safe to spread across many unrelated species)
+
+Mechanically simple, or already an explicit "same effect, reflavored" family reused across canon species — repeating these further costs nothing narratively:
+
+- **Single-status immunity family**: Limber, Insomnia, Vital Spirit, Immunity, Water Veil, Magma Armor, Own Tempo, Pastel Veil
+- **On-contact status family**: Static, Flame Body, Poison Point, Effect Spore, Poison Touch, Cute Charm
+- **Type-absorb/immunity family**: Volt Absorb, Water Absorb, Flash Fire, Sap Sipper, Motor Drive, Lightning Rod
+- **Weather-setter family**: Drizzle, Drought, Sand Stream, Snow Warning
+- **Weather-synergy family**: Swift Swim, Chlorophyll, Sand Rush, Slush Rush, Solar Power, Hydration, Leaf Guard, Rain Dish, Dry Skin, Ice Body, Sand Veil, Snow Cloak
+- **Stat-drop immunity family**: Clear Body, White Smoke, Hyper Cutter, Keen Eye
+- **Crit-immunity pair**: Battle Armor, Shell Armor
+- **Starter-triad low-HP boost**: Overgrow, Blaze, Torrent, Swarm
+- **Popular, mechanically-simple "safe to hand out" utility**: Intimidate, Levitate, Guts, Technician, Sturdy, Adaptability, Multiscale, Regenerator, Prankster, Contrary, Unaware, Magic Guard, Mold Breaker, Sheer Force, Moxie, Reckless, Iron Fist, Skill Link, Fur Coat, Tinted Lens, Filter, Solid Rock, Infiltrator, Rock Head, Scrappy, Analytic, Defiant, Competitive, Huge Power, Pressure, Thick Fat, Serene Grace, Natural Cure, Synchronize, Pickup, Hustle, Shed Skin, Unburden
+
+### Cull list (mostly useless, or narrow-but-not-flavorful filler)
+
+Stench, Damp, Cloud Nine, Shield Dust, Suction Cups, Illuminate, Soundproof, Run Away, Sticky Hold, Tangled Feet, Rivalry, Steadfast, Sniper, Super Luck, Bad Dreams, Pickpocket, Cursed Body, Light Metal, Harvest, Overcoat, Big Pecks, Wonder Skin, Rattled, Bulletproof, Corrosion, Fluffy, Tangling Hair, Screen Cleaner, Steely Spirit, Quick Draw, Cud Chew, Armor Tail, Minds Eye
+
+(33 abilities. Originally also included Gluttony, Anger Point, Aftermath, Weak Armor, Sand Force, Mega Launcher, Perish Body, and Wind Rider — removed from the cull list per review; those 8 are kept as-is, species-specific, same as the "remainder" bucket below, not moved into the generic pool.)
+
+### Remainder (kept as-is, not touched)
+
+Everything not listed in either pool above (~85 abilities) stays exactly as it is now — already a good, distinctive, appropriately-limited signature fit for its current species/line. Notable examples: Trace, Imposter, Download, Anticipation, Forewarn, Shadow Tag, Arena Trap, Moody, No Guard, Magic Bounce, Parental Bond, Gorilla Tactics, Neutralizing Gas, Magnet Pull, Liquid Ooze, Poison Heal, Pixilate, Galvanize — plus the 8 reprieved-from-cull abilities noted above.
+
+### Next steps (not yet started)
+
+1. Audit which evolutionary lines currently share a generic-pool ability vs. already have a good unique one, to find the actual list of lines that need a brand-new invented ability.
+2. Design the new abilities themselves (effect, name, description) for that list, reusing existing trigger hooks wherever possible to stay within the ROM budget above.
+3. Reassign cull-list abilities off their current species onto either the generic pool or a new invented ability, species by species.
+
 ## Mega Evolution
 
 ### Context
