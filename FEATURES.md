@@ -36,6 +36,7 @@ For the authoritative, per-species rules and the complete list of included Poké
 * Physical/Special/Status split.
 * Natures (determined from DVs since personality values don't exist in Gen II) thanks to FredrIQ.
 * Gain experience from catching Pokémon.
+* Party-wide experience: every living Pokémon in your party gains experience whenever a foe faints or is caught, like in newer games. Pokémon that didn't battle earn 50% of what a battler earns, and this stacks with the Exp. Share (a non-battling holder gets that 50% plus its normal Exp. Share amount).
 * Play low-pitched cries when a player or foe Pokémon faints.
 * Money loss uses a Gen VI-style formula.
 * Shiny Pokémon are determined by the project's shiny flag; the base shiny chance is 1/4096 (SHINY_NUMERATOR = 16). The Shiny Charm and the Masuda method modify this chance in egg/capture logic. The Odd Egg is always shiny.

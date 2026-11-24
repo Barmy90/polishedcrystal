@@ -6495,11 +6495,14 @@ GiveExperiencePoints:
 	call GetParticipantVar
 	call .CheckParticipation
 	pop bc
-	jmp z, .next_mon
+	; Living non-battlers still earn experience (a reduced share, see
+	; .MaybeScaleExp), but not EVs
+	jr z, .get_experience
 
 .participating
 	call GiveBattleEVs
 
+.get_experience
 	; No experience if disabled
 	ld a, [wInitialOptions2]
 	bit NO_EXP_OPT, a
@@ -6820,82 +6823,117 @@ GiveExperiencePoints:
 	ret
 
 .MaybeScaleExp:
-; Distribute Exp Points evenly among participants, and maybe scale Exp on level
+; Distribute Exp Points among the party, and maybe scale Exp on level
 	push bc
 
-	; Distribute among participants as follows:
-	; p=participats e=exp share holders
-	; If p or e is zero, just do 1/p or 1/e.
-	; Otherwise; P=e if participant, otherwise 0, E=p if holder, otherwise 0
-	; exp = current(E+P)/(2ep)
-	ld a, [wGivingExperienceToExpShareHolders]
-	ld d, a
-	call GetParticipantsNotFainted
-	ld e, a
-	and a
-	ld a, d
-	jr z, .single_factor
-	and a
-	ld a, e
-	jr z, .single_factor
+	; p = living participants (battlers), h = living Exp Share holders.
+	; Battlers and holders split the pool as before: only battlers = 1/p each,
+	; only holders = 1/h each, both = half the pool to each group.
+	; On top of that, every living non-battler gets half of what a non-holding
+	; battler gets (so Exp Share holders stack this with their normal share).
+	; As a fraction w/D of the pool, with I = holder, A = battler, N = not A:
+	;   h>0, p>0: w = 2pI + 2hA + hN, D = 4hp
+	;   h=0, p>0: w = 2A + N,         D = 2p
+	;   h>0, p=0: w = 4I + hN,        D = 4h
+	;   h=0, p=0: w = 1,              D = 2
 
-	; We are dealing with both participants and exp share holders.
-	; First, verify that we are a participant.
-	push de
+	; b: bit 0 = holder (I), bit 1 = battler (A)
 	ld b, 0
 	ld hl, wGivingExperienceToExpShareHolders
 	push bc
 	call .CheckParticipation
 	pop bc
-	pop de
-	push af
-	ld a, d
-	call .GetBits
-	ld d, a
-	pop af
-	jr z, .done_exp_share_pe
-	inc b
-
-.done_exp_share_pe
-	push de
+	jr z, .not_a_holder
+	set 0, b
+.not_a_holder
 	push bc
 	call GetParticipantVar
 	call .CheckParticipation
 	pop bc
-	pop de
-	push af
-	ld a, e
-	call .GetBits
-	ld e, a
-	pop af
-	jr z, .done_participants_pe
+	jr z, .not_a_battler
 	set 1, b
+.not_a_battler
 
-.done_participants_pe
-	push de
-	xor a
+	ld a, [wGivingExperienceToExpShareHolders]
+	call .GetBits
+	ld d, a ; h
+	call GetParticipantsNotFainted
+	call .GetBits
+	ld e, a ; p
+
+	; Get c = w and d = D
+	ld a, d
+	and a
+	jr z, .no_holders
+	ld a, e
+	and a
+	jr z, .holders_only
+
+	; w = 2pI + 2hA + hN
+	ld c, 0
 	bit 0, b
-	jr z, .not_a_participant
-	add e
-.not_a_participant
+	jr z, .both_not_holder
+	ld a, e
+	add a
+	ld c, a
+.both_not_holder
+	ld a, d
 	bit 1, b
-	jr z, .not_a_holder
-	add d
-.not_a_holder
-	ldh [hMultiplier], a
-	call Multiply
-	pop de
+	jr z, .both_not_battler
+	add a
+.both_not_battler
+	add c
+	ld c, a
+	; D = 4hp
+	push bc
 	ld a, d
 	ld c, e
 	call SimpleMultiply
 	add a
-	ldh [hDivisor], a
-	ld b, 4
-	call Divide
-	jr .done_sharing_exp
+	add a
+	pop bc
+	ld d, a
+	jr .got_weights
 
-.single_factor
-	call .GetBits
+.holders_only
+	; w = 4I + h, D = 4h
+	ld c, d
+	ld a, d
+	add a
+	add a
+	ld d, a
+	bit 0, b
+	jr z, .got_weights
+	ld a, c
+	add 4
+	ld c, a
+	jr .got_weights
+
+.no_holders
+	ld a, e
+	and a
+	jr nz, .battlers_only
+	; w = 1, D = 2
+	ld c, 1
+	ld d, 2
+	jr .got_weights
+
+.battlers_only
+	; w = 2A + N, D = 2p
+	add a
+	ld d, a
+	ld c, 1
+	bit 1, b
+	jr z, .got_weights
+	inc c
+
+.got_weights
+	push de
+	ld a, c
+	ldh [hMultiplier], a
+	call Multiply
+	pop de
+	ld a, d
 	ldh [hDivisor], a
 	ld b, 4
 	call Divide
