@@ -10,7 +10,9 @@
 if DEF(FAITHFUL)
 	abilities_for ANNIHILAPE, VITAL_SPIRIT, INNER_FOCUS, DEFIANT
 else
-	abilities_for ANNIHILAPE, GORILLA_TACTICS, INNER_FOCUS, DEFIANT
+	; Slots line up with Primeape (Gorilla Tactics / Anger Point / Defiant), so a
+	; Primeape with Anger Point evolves into one with Revenger
+	abilities_for ANNIHILAPE, INNER_FOCUS, REVENGER, DEFIANT
 endc
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_GROUND, EGG_GROUND ; egg groups

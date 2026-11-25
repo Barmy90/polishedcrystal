@@ -491,7 +491,12 @@ wTrickRoom:: db
 
 wBattleLowHealthAlarm:: db
 
-	ds 3 ; unused
+; How many Revenger stacks each side has built up. They have to survive
+; switching, so unlike volatile statuses they live here, in the battle block
+; that is only cleared at the start of a battle.
+wPlayerRevengerStacks:: db
+wEnemyRevengerStacks:: db
+	ds 1 ; unused
 
 wPlayerHazards::
 ; bit

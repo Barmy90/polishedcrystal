@@ -647,6 +647,7 @@ EnemyHitAbilitiesNonfainted:
 	dbw JUSTIFIED, JustifiedAbility
 	dbw RATTLED, RattledAbility
 	dbw WEAK_ARMOR, WeakArmorAbility
+	dbw REVENGER, RevengerHitAbility
 EnemyHitAbilities:
 	dbw CURSED_BODY, CursedBodyAbility
 	dbw -1, -1
@@ -1690,6 +1691,7 @@ OffensiveDamageAbilities:
 	dbw GORILLA_TACTICS, GorillaTacticsAbility
 	dbw STEELY_SPIRIT, SteelySpiritAbility
 	dbw SHARPNESS, SharpnessAbility
+	dbw REVENGER, RevengerAbility
 	dbw -1, -1
 
 DefensiveDamageAbilities:
@@ -1719,6 +1721,72 @@ GorillaTacticsAbility:
 ; 150% physical attack, locks into one move (done elsewhere)
 	ln a, 3, 2 ; x1.5
 	jmp ApplyPhysicalAttackDamageMod
+
+RevengerHitAbility:
+; Runs on the target (after SwitchTurn) when it takes a hit and survives. Each
+; damaging hit adds a Revenger stack, up to REVENGER_MAX_STACKS, for the rest of
+; the battle (the counters are only cleared at battle start, so switching out
+; doesn't reset them). b = move category, as set up by RunHitAbilities.
+	ld a, b
+	cp STATUS
+	ret z
+	call GetRevengerStacks
+	ld a, [hl]
+	cp REVENGER_MAX_STACKS
+	ret nc
+	inc [hl]
+	call BeginAndShowUserAbility
+	ld hl, RageBuildingText
+	call StdBattleTextbox
+	jmp EndAbility
+
+RevengerAbility:
+; +33% damage per stack for Ghost-type moves.
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp GHOST
+	ret nz
+	call GetRevengerStacks
+	ld a, [hl]
+	and a
+	ret z
+	; d holds the move's power for the damage calculation, keep it intact
+	push de
+	dec a
+	add a
+	ld e, a
+	ld d, 0
+	ld hl, RevengerBoosts
+	add hl, de
+	ld a, [hli]
+	ld d, [hl]
+	ldh [hMultiplier], a
+	farcall Multiply
+	ld a, d
+	ldh [hDivisor], a
+	ld b, 4
+	farcall Divide
+	pop de
+	ret
+
+GetRevengerStacks:
+; Returns hl = the current turn's side's Revenger stack counter.
+	ld hl, wPlayerRevengerStacks
+	ldh a, [hBattleTurn]
+	and a
+	ret z
+	ld hl, wEnemyRevengerStacks
+	ret
+
+RevengerBoosts:
+; (100 + 33 * stacks)% as a fraction (multiplier, divisor) for 1-6 stacks,
+; reduced so each part fits in a byte.
+	db 133, 100 ; 1 stack:  +33%
+	db  83,  50 ; 2 stacks: +66%
+	db 199, 100 ; 3 stacks: +99%
+	db  58,  25 ; 4 stacks: +132%
+	db  53,  20 ; 5 stacks: +165%
+	db 149,  50 ; 6 stacks: +198%
 
 OvergrowAbility:
 	ld b, GRASS

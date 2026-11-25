@@ -163,4 +163,8 @@
 	const ARMOR_TAIL
 	const MINDS_EYE
 	const MEGA_SOL
+	const REVENGER
 DEF NUM_ABILITIES EQU const_value
+
+; How many times Revenger can stack (see RevengerHitAbility).
+DEF REVENGER_MAX_STACKS EQU 6

@@ -355,7 +355,7 @@ endc
 if DEF(FAITHFUL)
 		tr_extra DEFIANT, ATK_UP_SATK_DOWN
 else
-		tr_extra GORILLA_TACTICS, ATK_UP_SATK_DOWN
+		tr_extra REVENGER, ATK_UP_SATK_DOWN
 endc
 		tr_evs 252 Atk, 4 Def, 252 Spe
 		tr_moves SHADOW_CLAW, CLOSE_COMBAT, STONE_EDGE, U_TURN
