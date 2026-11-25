@@ -1692,6 +1692,7 @@ OffensiveDamageAbilities:
 	dbw STEELY_SPIRIT, SteelySpiritAbility
 	dbw SHARPNESS, SharpnessAbility
 	dbw REVENGER, RevengerAbility
+	dbw ERUPTION, EruptionAbility
 	dbw -1, -1
 
 DefensiveDamageAbilities:
@@ -1806,6 +1807,13 @@ PinchAbility:
 	pop bc
 	jr z, TypeDependentAbility
 	ret
+
+EruptionAbility:
+; 150% damage for Fire-type moves while the user is at full HP
+	farcall CheckFullHP
+	ret nz
+	ld b, FIRE
+	jr TypeDependentAbility
 
 SteelySpiritAbility:
 	ld b, STEEL

@@ -164,6 +164,7 @@
 	const MINDS_EYE
 	const MEGA_SOL
 	const REVENGER
+	const ERUPTION
 DEF NUM_ABILITIES EQU const_value
 
 ; How many times Revenger can stack (see RevengerHitAbility).

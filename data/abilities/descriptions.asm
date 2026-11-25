@@ -161,6 +161,7 @@ AbilityDescriptions:
 	dw MindsEyeDescription
 	dw MegaSolDescription
 	dw RevengerDescription
+	dw EruptionDescription
 	assert_table_length NUM_ABILITIES
 
 NoAbilityDescription:
@@ -950,4 +951,9 @@ MegaSolDescription:
 RevengerDescription:
 	text "Taking hits powers"
 	next "up Ghost moves."
+	done
+
+EruptionDescription:
+	text "Powers Fire moves"
+	next "when at full HP."
 	done

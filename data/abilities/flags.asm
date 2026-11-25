@@ -177,4 +177,5 @@ AbilityFlags:
 	abilflag MINDS_EYE, IGNORABLE
 	abilflag MEGA_SOL
 	abilflag REVENGER
+	abilflag ERUPTION
 	assert_table_length NUM_ABILITIES

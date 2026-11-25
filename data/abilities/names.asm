@@ -161,6 +161,7 @@ AbilityNames:
 	dw MindsEye
 	dw MegaSol
 	dw Revenger
+	dw Eruption
 	assert_table_length NUM_ABILITIES
 
 NoAbility:       rawchar "---@"
@@ -324,3 +325,4 @@ ArmorTail:       rawchar "Armor Tail@"
 MindsEye:        rawchar "Mind's Eye@"
 MegaSol:         rawchar "Mega Sol@"
 Revenger:        rawchar "Revenger@"
+Eruption:        rawchar "Eruption@"

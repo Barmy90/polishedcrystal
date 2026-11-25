@@ -1703,7 +1703,11 @@ Rival1Group:
 		tr_evs 232 Atk
 		tr_moves SLASH, ICE_PUNCH, HONE_CLAWS, FEINT_ATTACK
 	tr_mon 43, TYPHLOSION @ SITRUS_BERRY, MALE
+if DEF(FAITHFUL)
 		tr_extra BLAZE
+else
+		tr_extra ERUPTION
+endc
 		tr_evs 88 Atk, 72 SAt, 72 Spe
 		tr_moves SMOKESCREEN, FLAME_CHARGE, DIG, SWIFT
 	end_trainer
@@ -1780,7 +1784,11 @@ def_trainer RIVAL1_14, "<RIVAL>"
 		tr_evs 144 SAt, 144 Spe
 		tr_moves DISABLE, PSYCHIC_M, RECOVER, SHADOW_BALL
 	tr_mon 49, TYPHLOSION @ SITRUS_BERRY, MALE
+if DEF(FAITHFUL)
 		tr_extra BLAZE
+else
+		tr_extra ERUPTION
+endc
 		tr_evs 144 SAt, 144 Spe
 		tr_moves SMOKESCREEN, REVERSAL, DIG, FLAMETHROWER
 	end_trainer
