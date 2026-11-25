@@ -151,7 +151,11 @@ MoveNames::
 	li "Extrasensory"
 	li "Splash"
 	li "Dragon Dance"
+if DEF(FAITHFUL)
 	li "Crabhammer"
+else
+	li "Tidal Crush"
+endc
 	li "Explosion"
 	li "Fury Strikes"
 	li "Bonemerang"

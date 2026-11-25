@@ -163,6 +163,7 @@ AbilityDescriptions:
 	dw RevengerDescription
 	dw EruptionDescription
 	dw BecalmingScentDescription
+	dw StrongJawDescription
 	assert_table_length NUM_ABILITIES
 
 NoAbilityDescription:
@@ -962,4 +963,9 @@ EruptionDescription:
 BecalmingScentDescription:
 	text "Takes 20% less"
 	next "damage from moves."
+	done
+
+StrongJawDescription:
+	text "Boosts the power"
+	next "of biting moves."
 	done

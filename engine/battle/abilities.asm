@@ -1697,6 +1697,7 @@ OffensiveDamageAbilities:
 	dbw SHARPNESS, SharpnessAbility
 	dbw REVENGER, RevengerAbility
 	dbw ERUPTION, EruptionAbility
+	dbw STRONG_JAW, StrongJawAbility
 	dbw -1, -1
 
 DefensiveDamageAbilities:
@@ -1916,6 +1917,14 @@ SharpnessAbility:
 	jr MoveBoostAbility
 
 INCLUDE "data/moves/slicing_moves.asm"
+
+StrongJawAbility:
+; 150% damage for biting moves
+	ld hl, BitingMoves
+	ln b, 3, 2 ; x1.5
+	jr MoveBoostAbility
+
+INCLUDE "data/moves/biting_moves.asm"
 
 MoveBoostAbility:
 	ld a, BATTLE_VARS_MOVE

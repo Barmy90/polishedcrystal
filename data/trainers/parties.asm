@@ -1734,7 +1734,11 @@ endc
 		tr_evs 232 Atk
 		tr_moves SLASH, ICE_PUNCH, HONE_CLAWS, FEINT_ATTACK
 	tr_mon 43, FERALIGATR @ SITRUS_BERRY, MALE
+if DEF(FAITHFUL)
 		tr_extra TORRENT
+else
+		tr_extra STRONG_JAW
+endc
 		tr_evs 160 Atk, 72 Spe
 		tr_moves SLASH, SURF, CRUNCH, NIGHT_SLASH
 	end_trainer
@@ -1823,7 +1827,11 @@ def_trainer RIVAL1_15, "<RIVAL>"
 		tr_evs 144 SAt, 144 Spe
 		tr_moves DISABLE, PSYCHIC_M, RECOVER, SHADOW_BALL
 	tr_mon 49, FERALIGATR @ SITRUS_BERRY, MALE
+if DEF(FAITHFUL)
 		tr_extra TORRENT
+else
+		tr_extra STRONG_JAW
+endc
 		tr_evs 144 Atk, 144 Spe
 		tr_moves CRUNCH, SURF, SLASH, REVERSAL
 	end_trainer

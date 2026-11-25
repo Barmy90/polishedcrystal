@@ -271,7 +271,9 @@ LowKickDescription:
 
 KarateChopDescription:
 RazorLeafDescription:
+if DEF(FAITHFUL)
 CrabhammerDescription:
+endc
 SlashDescription:
 AeroblastDescription:
 CrossChopDescription:
@@ -284,6 +286,14 @@ endc
 	text "Has a high criti-"
 	next "cal hit ratio."
 	done
+
+if !DEF(FAITHFUL)
+CrabhammerDescription:
+; Tidal Crush
+	text "Doubles power if"
+	next "it strikes first."
+	done
+endc
 
 SwiftDescription:
 FeintAttackDescription:

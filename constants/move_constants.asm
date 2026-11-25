@@ -158,6 +158,9 @@
 	const SPLASH        ; $96
 	const DRAGON_DANCE  ; $97
 	const CRABHAMMER    ; $98
+if !DEF(FAITHFUL)
+DEF TIDAL_CRUSH EQU CRABHAMMER
+endc
 	const EXPLOSION     ; $99
 	const FURY_STRIKES  ; $9a
 	const BONEMERANG    ; $9b

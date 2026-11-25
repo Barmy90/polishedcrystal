@@ -3489,7 +3489,11 @@ endc
 	learnset 32, AGILITY
 	learnset 37, CRUNCH
 	learnset 45, ANCIENTPOWER ; Chip Away → HGSS tutor move
+if DEF(FAITHFUL)
 	learnset 50, SLASH
+else
+	learnset 50, TIDAL_CRUSH ; Slash → Tidal Crush
+endc
 	learnset 56, SCREECH
 	learnset 62, THRASH
 	learnset 68, OUTRAGE ; HGSS tutor move

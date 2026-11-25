@@ -166,6 +166,7 @@
 	const REVENGER
 	const ERUPTION
 	const BECALMING_SCENT
+	const STRONG_JAW
 DEF NUM_ABILITIES EQU const_value
 
 ; How many times Revenger can stack (see RevengerHitAbility).

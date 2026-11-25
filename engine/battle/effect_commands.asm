@@ -6322,6 +6322,9 @@ BoostJumptable:
 	dbw VENOSHOCK,  DoVenoshock
 	dbw KNOCK_OFF,  DoKnockOff
 	dbw PURSUIT,    DoPursuit
+if !DEF(FAITHFUL)
+	dbw TIDAL_CRUSH, DoTidalCrush
+endc
 	dbw -1, -1
 
 BattleCommand_conditionalboost:
@@ -6369,6 +6372,21 @@ DoPursuit:
 	ld a, [wDeferredSwitch]
 	and a
 	jr DoubleDamageIfNZ
+
+if !DEF(FAITHFUL)
+DoTidalCrush:
+; Double power if the user moves before its target, or the target switched in
+; this turn (switching in resets its turn counter, as Speed Boost relies on)
+	call CheckOpponentWentFirst
+	jr z, DoubleDamage
+	call SwitchTurn
+	farcall GetTurnsTaken
+	call SwitchTurn
+	ld a, [hl]
+	and a
+	ret nz
+	jr DoubleDamage
+endc
 
 BattleCommand_doubleflyingdamage:
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
