@@ -178,4 +178,5 @@ AbilityFlags:
 	abilflag MEGA_SOL
 	abilflag REVENGER
 	abilflag ERUPTION
+	abilflag BECALMING_SCENT, IGNORABLE
 	assert_table_length NUM_ABILITIES

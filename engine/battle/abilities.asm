@@ -61,6 +61,7 @@ BattleEntryAbilities:
 	dbw MOLD_BREAKER, MoldBreakerAbility
 	dbw NEUTRALIZING_GAS, NeutralizingGasAbility
 	dbw SCREEN_CLEANER, ScreenCleanerAbility
+	dbw BECALMING_SCENT, BecalmingScentEntryAbility
 	; fallthrough
 StatusHealAbilities:
 ; Status immunity abilities that autoproc if the user gets the status or the ability
@@ -86,6 +87,9 @@ MoldBreakerAbility:
 	jr NotificationAbilities
 UnnerveAbility:
 	ld hl, NotifyUnnerve
+	jr NotificationAbilities
+BecalmingScentEntryAbility:
+	ld hl, NotifyBecalmingScent
 	jr NotificationAbilities
 NeutralizingGasAbility:
 	ld hl, NotifyNeutralizingGas
@@ -1702,6 +1706,7 @@ DefensiveDamageAbilities:
 	dbw DRY_SKIN, EnemyDrySkinAbility
 	dbw FUR_COAT, EnemyFurCoatAbility
 	dbw FLUFFY, EnemyFluffyAbility
+	dbw BECALMING_SCENT, EnemyBecalmingScentAbility
 	dbw -1, -1
 
 TechnicianAbility:
@@ -1990,6 +1995,11 @@ AteAbilities:
 	; here, because this is done after the game has already figured out whether
 	; the move is physical or special.
 	ln a, 6, 5 ; x1.2
+	jmp MultiplyAndDivide
+
+EnemyBecalmingScentAbility:
+; 80% damage taken from moves
+	ln a, 4, 5 ; x0.8
 	jmp MultiplyAndDivide
 
 EnemyMultiscaleAbility:

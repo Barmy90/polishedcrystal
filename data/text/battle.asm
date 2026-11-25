@@ -1535,6 +1535,12 @@ NotifyMoldBreaker:
 	line "breaks the mold!"
 	prompt
 
+NotifyBecalmingScent:
+	text "<USER>'s"
+	line "scent lowered"
+	cont "aggression!"
+	prompt
+
 NotifyUnnerve:
 	text "<TARGET> is"
 	line "too afraid to eat"

@@ -162,6 +162,7 @@ AbilityDescriptions:
 	dw MegaSolDescription
 	dw RevengerDescription
 	dw EruptionDescription
+	dw BecalmingScentDescription
 	assert_table_length NUM_ABILITIES
 
 NoAbilityDescription:
@@ -956,4 +957,9 @@ RevengerDescription:
 EruptionDescription:
 	text "Powers Fire moves"
 	next "when at full HP."
+	done
+
+BecalmingScentDescription:
+	text "Takes 20% less"
+	next "damage from moves."
 	done

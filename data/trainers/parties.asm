@@ -1680,7 +1680,11 @@ Rival1Group:
 		tr_evs 232 Atk
 		tr_moves SLASH, ICE_PUNCH, HONE_CLAWS, FEINT_ATTACK
 	tr_mon 43, MEGANIUM @ SITRUS_BERRY, MALE
+if DEF(FAITHFUL)
 		tr_extra OVERGROW
+else
+		tr_extra BECALMING_SCENT
+endc
 		tr_evs 72 Atk, 160 SAt ; Still has some Atk EVs for continuity
 		tr_moves REFLECT, LIGHT_SCREEN, PETAL_DANCE, ANCIENTPOWER
 	end_trainer
@@ -1757,7 +1761,11 @@ endc
 		tr_evs 144 SAt, 144 Spe
 		tr_moves DISABLE, PSYCHIC_M, RECOVER, SHADOW_BALL
 	tr_mon 49, MEGANIUM @ SITRUS_BERRY, MALE
+if DEF(FAITHFUL)
 		tr_extra OVERGROW
+else
+		tr_extra BECALMING_SCENT
+endc
 		tr_evs 144 HP, 144 SAt
 		tr_moves REFLECT, LIGHT_SCREEN, ENERGY_BALL, ANCIENTPOWER
 	end_trainer

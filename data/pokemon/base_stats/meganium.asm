@@ -19,7 +19,7 @@ endc
 if DEF(FAITHFUL)
 	abilities_for MEGANIUM, OVERGROW, LEAF_GUARD, MEGA_SOL
 else
-	abilities_for MEGANIUM, OVERGROW, NATURAL_CURE, MEGA_SOL
+	abilities_for MEGANIUM, BECALMING_SCENT, NATURAL_CURE, MEGA_SOL
 endc
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_MONSTER, EGG_PLANT ; egg groups

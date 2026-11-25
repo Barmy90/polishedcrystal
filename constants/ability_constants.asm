@@ -165,6 +165,7 @@
 	const MEGA_SOL
 	const REVENGER
 	const ERUPTION
+	const BECALMING_SCENT
 DEF NUM_ABILITIES EQU const_value
 
 ; How many times Revenger can stack (see RevengerHitAbility).
