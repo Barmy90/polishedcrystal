@@ -1067,7 +1067,8 @@ IgnoreSleepOnly:
 	ret
 
 BattleCommand_usedmovetext:
-	farjp DisplayUsedMoveText
+	farcall DisplayUsedMoveText
+	farjp OverloadMoveUsed
 
 CheckUserIsCharging:
 	ldh a, [hBattleTurn]

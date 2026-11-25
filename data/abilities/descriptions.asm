@@ -164,6 +164,7 @@ AbilityDescriptions:
 	dw EruptionDescription
 	dw BecalmingScentDescription
 	dw StrongJawDescription
+	dw OverloadDescription
 	assert_table_length NUM_ABILITIES
 
 NoAbilityDescription:
@@ -968,4 +969,9 @@ BecalmingScentDescription:
 StrongJawDescription:
 	text "Boosts the power"
 	next "of biting moves."
+	done
+
+OverloadDescription:
+	text "Stores charge for"
+	next "Electric moves."
 	done

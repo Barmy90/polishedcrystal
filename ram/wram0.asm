@@ -496,7 +496,10 @@ wBattleLowHealthAlarm:: db
 ; that is only cleared at the start of a battle.
 wPlayerRevengerStacks:: db
 wEnemyRevengerStacks:: db
-	ds 1 ; unused
+
+; Overload's stored charge, one nibble per side (see ability_constants.asm).
+; WRAM0 is full, hence the packing. Each side's nibble clears on switching in.
+wOverloadState:: db
 
 wPlayerHazards::
 ; bit

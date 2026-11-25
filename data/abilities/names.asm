@@ -164,6 +164,7 @@ AbilityNames:
 	dw Eruption
 	dw BecalmingScent
 	dw StrongJaw
+	dw Overload
 	assert_table_length NUM_ABILITIES
 
 NoAbility:       rawchar "---@"
@@ -330,3 +331,4 @@ Revenger:        rawchar "Revenger@"
 Eruption:        rawchar "Eruption@"
 BecalmingScent:  rawchar "Becalming Scent@"
 StrongJaw:       rawchar "Strong Jaw@"
+Overload:        rawchar "Overload@"

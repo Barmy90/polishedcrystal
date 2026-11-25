@@ -1360,7 +1360,92 @@ _EndturnAbilities:
 EndturnAbilityTableA:
 	dbw SHED_SKIN, ShedSkinAbility
 	dbw HYDRATION, HydrationAbility
+	dbw OVERLOAD, OverloadEndTurnAbility
 	dbw -1, -1
+
+OverloadMoveUsed::
+; Runs right after "<mon> used <move>!". Notes that an Overload user moved this
+; turn, and announces stored charge being released by an Electric-type move.
+	ld a, BATTLE_VARS_SUBSTATUS2
+	call GetBattleVar
+	bit SUBSTATUS_IN_ABILITY, a
+	ret nz
+	call GetTrueUserAbility
+	cp OVERLOAD
+	ret nz
+	call GetOverloadState
+	set OVERLOAD_USED_MOVE_F, a
+	ld b, a
+	call SetOverloadState
+	ld a, b
+	and OVERLOAD_CHARGE_MASK
+	ret z
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp ELECTRIC
+	ret nz
+	; leave the "used move" text up long enough to read
+	ld c, 40
+	call DelayFrames
+	ld hl, OverloadReleaseText
+	jmp NotificationAbilities
+
+OverloadEndTurnAbility:
+; After a turn with a move: an Electric-type move spent the charge, anything
+; else stores one more.
+	call GetOverloadState
+	bit OVERLOAD_USED_MOVE_F, a
+	ret z
+	and OVERLOAD_CHARGE_MASK
+	ld c, a
+	ld b, 0
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp ELECTRIC
+	jr z, SetOverloadState
+	ld a, c
+	cp OVERLOAD_MAX_CHARGE
+	jr nc, .full
+	inc c
+.full
+	ld b, c
+	call SetOverloadState
+	ld hl, OverloadStoreText
+	jmp NotificationAbilities
+
+GetOverloadState:
+; Returns a = the current turn's side's Overload nibble.
+	ldh a, [hBattleTurn]
+	and a
+	ld a, [wOverloadState]
+	jr z, .got_nibble
+	swap a
+.got_nibble
+	and $f
+	ret
+
+SetOverloadState:
+; Stores b (0-15) as the current turn's side's Overload nibble. Keeps bc intact.
+	ld hl, wOverloadState
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy
+	ld a, [hl]
+	and $f0
+	or b
+	ld [hl], a
+	ret
+.enemy
+	ld a, b
+	swap a
+	push bc
+	ld b, a
+	ld a, [hl]
+	and $0f
+	or b
+	ld [hl], a
+	pop bc
+	ret
 
 EndturnAbilityTableB:
 	dbw CUD_CHEW, CudChewAbility
@@ -1698,6 +1783,7 @@ OffensiveDamageAbilities:
 	dbw REVENGER, RevengerAbility
 	dbw ERUPTION, EruptionAbility
 	dbw STRONG_JAW, StrongJawAbility
+	dbw OVERLOAD, OverloadAbility
 	dbw -1, -1
 
 DefensiveDamageAbilities:
@@ -1813,6 +1899,20 @@ PinchAbility:
 	pop bc
 	jr z, TypeDependentAbility
 	ret
+
+OverloadAbility:
+; +20% per stored charge for Electric-type moves. The charge is only spent at
+; the end of the turn, so every hit (and the AI's estimates) see the same value.
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp ELECTRIC
+	ret nz
+	call GetOverloadState
+	and OVERLOAD_CHARGE_MASK
+	ret z
+	swap a
+	add $55 ; (5 + n) / 5
+	jmp MultiplyAndDivide
 
 EruptionAbility:
 ; 150% damage for Fire-type moves while the user is at full HP

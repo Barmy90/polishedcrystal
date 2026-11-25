@@ -3063,6 +3063,10 @@ NewEnemyMonStatus:
 	ld [wPlayerWrapCount], a
 	ld [wEnemyWrapCount], a
 	ld [wEnemyTurnsTaken], a
+	ld hl, wOverloadState
+	ld a, [hl]
+	and $0f ; the enemy's stored Overload charge is lost on switching
+	ld [hl], a
 	ld hl, wPlayerSubStatus2
 	res SUBSTATUS_CANT_RUN, [hl]
 	; fallthrough
@@ -3243,6 +3247,10 @@ endr
 	ld [wEnemyWrapCount], a
 	ld [wPlayerWrapCount], a
 	ld [wPlayerTurnsTaken], a
+	ld hl, wOverloadState
+	ld a, [hl]
+	and $f0 ; the player's stored Overload charge is lost on switching
+	ld [hl], a
 	ld hl, wEnemySubStatus2
 	res SUBSTATUS_CANT_RUN, [hl]
 	jmp ResetPlayerAbility

@@ -167,7 +167,14 @@
 	const ERUPTION
 	const BECALMING_SCENT
 	const STRONG_JAW
+	const OVERLOAD
 DEF NUM_ABILITIES EQU const_value
 
 ; How many times Revenger can stack (see RevengerHitAbility).
 DEF REVENGER_MAX_STACKS EQU 6
+
+; wOverloadState holds one nibble per side (player low, enemy high):
+; bits 0-2 = stored charge, bit 3 = used a move this turn.
+DEF OVERLOAD_CHARGE_MASK  EQU %0111
+DEF OVERLOAD_USED_MOVE_F  EQU 3
+DEF OVERLOAD_MAX_CHARGE   EQU 5 ; +20% each, so at most double damage

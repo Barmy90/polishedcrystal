@@ -180,4 +180,5 @@ AbilityFlags:
 	abilflag ERUPTION
 	abilflag BECALMING_SCENT, IGNORABLE
 	abilflag STRONG_JAW
+	abilflag OVERLOAD
 	assert_table_length NUM_ABILITIES

@@ -1535,6 +1535,17 @@ NotifyMoldBreaker:
 	line "breaks the mold!"
 	prompt
 
+OverloadStoreText:
+	text "<USER>"
+	line "is storing charge!"
+	prompt
+
+OverloadReleaseText:
+	text "<USER>"
+	line "released its"
+	cont "charge!"
+	prompt
+
 NotifyBecalmingScent:
 	text "<USER>'s"
 	line "scent lowered"
